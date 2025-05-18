@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Jovix 终端风格个人网站 V2：沉浸式控制室布局与交互式网页终端体验。" />
+    <meta name="keywords" content="Jovix, 个人网站, 终端, 开发者, 软件工程师, 前端架构" />
+    <title>Jovix // 终端控制台 V2</title>
+    <link rel="icon" href="avatar.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Bricolage+Grotesque:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style-v2.css" />
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <main class="control-room">
+      <header class="top-bar" aria-label="页面总览">
+        <div>
+          <p class="chip">1STEP.DEV / V2</p>
+          <h1>终端控制台视图</h1>
+        </div>
+        <p class="top-copy">
+          按住电源键开机后，可运行 <code>help</code>、<code>projects</code>、<code>theme matrix</code> 和
+          <code>history</code> 等命令探索更多功能。
+        </p>
+      </header>
+
+      <section class="main-bay" aria-label="终端区域">
+        <aside class="dock-panel" aria-label="命令提示面板">
+          <p class="dock-title">命令面板</p>
+          <ul>
+            <li><code>whoami</code> 查看个人概况</li>
+            <li><code>skills</code> 查看技术栈</li>
+            <li><code>socials</code> 查看外部链接</li>
+            <li><code>theme solarized</code> 切换浅色主题</li>
+          </ul>
+        </aside>
+
+        <section class="terminal-frame" aria-label="交互终端">
+          <div id="terminal" style="display: none">
+            <div id="terminal-header">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+              <span class="title"></span>
+            </div>
+            <div id="terminal-body"></div>
+          </div>
+
+          <div id="power-button-area">
+            <button id="power-on-btn" aria-label="开机">
+              <svg id="power-button-light-strip-svg" viewBox="0 0 72 72">
+                <circle id="power-button-light-strip-circle" cx="36" cy="36" r="33.75" />
+              </svg>
+              <svg
+                id="power-button-icon-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12.0001 2.00004C13.1009 2.00004 14.043 2.89938 14.1098 3.99396L14.1112 4.22738V10.7727C14.1112 11.8778 13.212 12.7727 12.107 12.7727C11.0018 12.7727 10.1068 11.8829 10.1025 10.7871L10.1024 10.7727V4.22738C10.1024 3.12231 10.9975 2.22738 12.1026 2.22738L12.0001 2.00004ZM12.0001 0.0000446963C6.47726 0.0000446963 2.00012 4.47718 2.00012 10C2.00012 15.5229 6.47726 20 12.0001 20C17.523 20 22.0001 15.5229 22.0001 10C22.0001 4.47718 17.523 0.0000446963 12.0001 0.0000446963ZM12.0001 18C7.58185 18 4.00012 14.4183 4.00012 10C4.00012 5.58176 7.58185 2.00004 12.0001 2.00004C16.4184 2.00004 20.0001 5.58176 20.0001 10C20.0001 14.4183 16.4184 18 12.0001 18Z"
+                />
+              </svg>
+            </button>
+            <div id="power-on-prompt">按住开机</div>
+          </div>
+        </section>
+      </section>
+
+      <section class="content-grid" aria-label="内容模块">
+        <section class="module about-module">
+          <p class="module-kicker">关于我</p>
+          <h2 class="module-title">用终端思维构建可靠的产品</h2>
+          <div class="about-layout">
+            <div class="about-copy">
+              <p>
+                我专注于交付清晰的界面与稳定的系统，重点在可维护的前端架构、务实的后端 API，以及可量化的产品结果。
+              </p>
+              <p>我偏好快速反馈：先快速原型验证，再逐步打磨到生产级质量。</p>
+            </div>
+            <div class="about-metrics">
+              <div class="metric-card">
+                <span class="metric-value">20+</span>
+                <span class="metric-label">交付项目</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-value">6</span>
+                <span class="metric-label">Web 开发年限</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-value">99.9%</span>
+                <span class="metric-label">目标可用性</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="module projects-module">
+          <div class="module-head">
+            <p class="module-kicker">精选项目</p>
+            <a href="https://1step.dev" target="_blank" class="module-link">查看全部文章与作品</a>
+          </div>
+          <div class="project-grid">
+            <article class="project-card">
+              <p class="project-name">终端作品集网站</p>
+              <p class="project-desc">交互式浏览器终端，用于展示个人信息、项目与社交链接。</p>
+              <p class="project-stack">HTML / CSS / Vanilla JS</p>
+            </article>
+            <article class="project-card">
+              <p class="project-name">实时运维仪表盘</p>
+              <p class="project-desc">面向分布式服务的监控面板，支持告警与趋势分析。</p>
+              <p class="project-stack">React / Node.js / PostgreSQL</p>
+            </article>
+            <article class="project-card">
+              <p class="project-name">内容自动化工具集</p>
+              <p class="project-desc">用于内容生产的自动化工具集，降低发布流程的人力成本。</p>
+              <p class="project-stack">Python / APIs / CI Pipelines</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="module timeline-module">
+          <p class="module-kicker">时间线</p>
+          <h2 class="module-title">关键里程碑</h2>
+          <div class="timeline-list">
+            <div class="timeline-item">
+              <span class="timeline-year">2026</span>
+              <p>升级个人终端网站至 V2，并持续输出工程实践长文。</p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2025</span>
+              <p>主导多服务 Web 平台交付，重点优化性能与可观测性。</p>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2024</span>
+              <p>构建可复用 UI 与 API 基础设施，缩短产品发布周期。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="module now-module">
+          <p class="module-kicker">近况</p>
+          <h2 class="module-title">当前关注方向</h2>
+          <ul class="now-list">
+            <li>打磨终端风格界面的开发体验与组件体系。</li>
+            <li>持续整理前端架构与工程交付实践文章。</li>
+            <li>欢迎产品化 AI 与开发者工具方向的合作。</li>
+          </ul>
+        </section>
+
+        <section class="module contact-module">
+          <p class="module-kicker">联系我</p>
+          <h2 class="module-title">有项目想法？我们聊聊</h2>
+          <p class="contact-copy">如果你正在做产品，需要架构、实现或交付上的支持，欢迎联系我。</p>
+          <div class="contact-actions">
+            <a href="mailto:jovix0101@gmail.com" class="cta-primary">发邮件</a>
+            <a href="https://github.com/jovix0101" target="_blank" class="cta-secondary">GitHub</a>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer id="developer-info">
+      由 Jovix 开发，Google Gemini 协助。 |
+      <a href="https://1step.dev" target="_blank" class="footer-link">我的博客</a>
+    </footer>
+
+    <script type="module" src="main.js"></script>
+    <script defer src="https://analytics.1step.dev/tracker.min.js" data-website-id="1step.dev"></script>
+  </body>
+</html>
