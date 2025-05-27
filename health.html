@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>续命指南：身心双修20招</title>
+    <script src="https://cdn.tailwindcss.com/3.4.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.umd.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            background-color: #f0f4f8; /* Light calming blue-gray */
+            color: #333;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .bent-grid-item {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* Safari */
+            border-radius: 1.5rem; /* 24px */
+            padding: 2rem; /* 32px */
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Add transition for hover */
+        }
+
+        .highlight-glow-green {
+            box-shadow: 0 0 15px 5px rgba(74, 222, 128, 0.5), /* Green glow */
+                                    0 0 30px 10px rgba(74, 222, 128, 0.3),
+                                    0 0 45px 15px rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.6);
+        }
+
+        .highlight-glow-blue {
+            box-shadow: 0 0 15px 5px rgba(59, 130, 246, 0.4),
+                                    0 0 30px 10px rgba(59, 130, 246, 0.2),
+                                    0 0 45px 15px rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
+
+        .section-title {
+            font-size: 3rem; /* 48px */
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #1a202c; /* Darker text for titles */
+        }
+        .section-subtitle-en {
+            font-size: 1.125rem; /* 18px */
+            color: #4a5568; /* Medium gray */
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2.5rem; /* 40px */
+        }
+
+        .tip-card {
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .tip-number {
+            font-size: 4rem; /* 64px */
+            font-weight: 900;
+            color: #cbd5e1; /* Light gray, less prominent */
+            line-height: 1;
+        }
+        .tip-title-cn {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 700;
+            color: #2d3748; /* Darker text for tip titles */
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .tip-desc {
+            font-size: 1rem; /* 16px */
+            color: #4a5568; /* Medium gray for descriptions */
+            line-height: 1.6;
+        }
+        .tip-icon {
+            font-size: 2.5rem; /* 40px */
+            margin-bottom: 1rem;
+        }
+        .text-emphasis {
+            color: #38a169; /* Green accent for emphasis */
+            font-weight: 600;
+        }
+        .decorative-line {
+            width: 80px;
+            height: 4px;
+            margin: 1rem auto; /* Centered */
+            border-radius: 2px;
+        }
+        /* Style for iframes to ensure responsiveness and proper embedding */
+        .audio-iframe-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        .audio-iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* New styles for golden quotes as sticky notes */
+        .quote-note-item {
+            background-color: #fffbe6; /* Light yellow for notes */
+            border: 1px solid #fcd34d; /* Yellow border */
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            padding: 1.5rem; /* Slightly less padding */
+            border-radius: 0.75rem; /* Slightly less rounded */
+            /* Ensure text is readable */
+            color: #333;
+            font-weight: 600;
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Add transition for hover */
+        }
+        .quote-note-item:nth-child(2n) { 
+            background-color: #ecfdf5; /* Light green */
+            border-color: #6ee7b7; 
+        } 
+        .quote-note-item:nth-child(3n) { 
+            background-color: #e0f2fe; /* Light blue */
+            border-color: #93c5fd; 
+        }
+        .quote-note-item:nth-child(4n) { 
+            background-color: #fee2e2; /* Light red */
+            border-color: #fca5a5; 
+        }
+        .quote-note-item:nth-child(5n) { 
+            background-color: #f3e8ff; /* Light purple */
+            border-color: #d8b4fe; 
+        }
+
+        /* Floating Lo-fi Player */
+        #lofi-player-floating {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+    <div id="app-container">
+
+        <section id="cover" class="min-h-screen flex flex-col justify-center items-center p-8 bg-gradient-to-br from-emerald-500 to-teal-600 text-white text-center relative overflow-hidden">
+            <div data-motion-group="cover-content" class="relative z-10">
+                <h1 data-motion-item="cover-title" class="text-6xl md:text-8xl font-extrabold mb-4 leading-tight opacity-0">
+                    续命指南 <span class="text-4xl md:text-6xl font-semibold">身心双修<span class="text-yellow-300">20</span>招</span>
+                </h1>
+                <p data-motion-item="cover-subtitle" class="text-xl md:text-2xl mb-2 opacity-0">DEVELOPER WELLNESS: 20 TIPS FOR BODY & MIND</p>
+                <p data-motion-item="cover-date" class="text-lg md:text-xl mb-8 text-emerald-200 opacity-0">jovix</p>
+                <blockquote data-motion-item="cover-quote" class="text-2xl md:text-3xl italic font-light border-l-4 border-yellow-300 pl-6 py-2 opacity-0">
+                    “不养生，就养医生”
+                </blockquote>
+            </div>
+            <div class="absolute -top-20 -left-20 w-72 h-72 bg-white/10 rounded-full filter blur-xl opacity-0" data-motion-item="cover-deco1"></div>
+            <div class="absolute -bottom-20 -right-10 w-96 h-96 bg-white/15 rounded-full filter blur-2xl opacity-0" data-motion-item="cover-deco2"></div>
+            <div data-motion-item="cover-scroll-indicator" class="absolute bottom-10 text-3xl opacity-0">
+                <i class="fa-solid fa-chevron-down animate-bounce"></i> </div>
+        </section>
+
+        <section id="toc" class="py-16 md:py-24 px-6 md:px-12 bg-slate-50">
+            <div data-scroll-animate class="max-w-4xl mx-auto text-center opacity-0">
+                <h2 class="section-title">分享提纲 <span class="block section-subtitle-en mt-1">TABLE OF CONTENTS</span></h2>
+                <ul class="text-xl md:text-2xl space-y-5 text-slate-700 mt-8 max-w-xl mx-auto text-left pl-16"> <li class="flex items-center hover:text-emerald-600 transition-colors duration-300"> <i class="fas fa-circle-dot text-emerald-400 text-lg mr-3"></i>
+                        1. 身体养生：久坐不动，我们怎么自救？
+                    </li>
+                    <li class="flex items-center hover:text-emerald-600 transition-colors duration-300"> <i class="fas fa-circle-dot text-emerald-400 text-lg mr-3"></i>
+                        2. 精神养生：如何避免精神“高并发”？
+                    </li>
+                    <li class="flex items-center hover:text-emerald-600 transition-colors duration-300"> <i class="fas fa-circle-dot text-emerald-400 text-lg mr-3"></i>
+                        3. 工作习惯：健康的节奏比狂热更稳
+                    </li>
+                    <li class="flex items-center hover:text-emerald-600 transition-colors duration-300"> <i class="fas fa-circle-dot text-emerald-400 text-lg mr-3"></i>
+                        4. 卡片金句
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="body-wellness" class="py-16 md:py-24 px-6 md:px-12 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <div data-scroll-animate class="text-center mb-12 opacity-0">
+                    <h2 class="section-title">身体养生 <span class="text-emerald-500">TIPS</span></h2>
+                    <p class="section-subtitle-en">PHYSICAL WELL-BEING: RESCUING OURSELVES FROM SEDENTARY LIFESTYLES</p>
+                    <div class="decorative-line mx-auto bg-emerald-400"></div>
+                </div>
+
+                <div data-stagger-children-group class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bent-grid-item tip-card lg:col-span-1">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number">01</span>
+                                <i class="fas fa-person-walking tip-icon text-sky-500"></i>
+                            </div>
+                            <h3 class="tip-title-cn">每工作50分钟，站起来活动5分钟</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">50 WORK, 5 STAND</p>
+                        </div>
+                        <p class="tip-desc mt-auto">缓解颈椎、腰椎压力，预防久坐综合征。</p>
+                    </div>
+
+                    <div class="bent-grid-item tip-card highlight-glow-green lg:row-span-2">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number">02</span>
+                                <i class="fas fa-eye tip-icon text-amber-500"></i>
+                            </div>
+                            <h3 class="tip-title-cn">20-20-20护眼法</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">20-20-20 EYE CARE RULE</p>
+                        </div>
+                        <p class="tip-desc mt-auto">每20分钟看20英尺（约6米）外20秒，缓解眼疲劳、预防干眼。</p>
+                        <img src="https://placehold.co/400x200/a7f3d0/166534?text=Vision+Care" alt="Eye Care Diagram" class="mt-4 rounded-lg w-full object-cover h-32">
+                    </div>
+
+                    <div class="bent-grid-item tip-card">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number">03</span>
+                                <i class="fas fa-mug-hot tip-icon text-orange-500"></i>
+                            </div>
+                            <h3 class="tip-title-cn">菊花+枸杞养眼茶</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">EYE-CARE TEA</p>
+                        </div>
+                        <p class="tip-desc mt-auto">护肝明目，适合长时间看屏幕的程序员。</p>
+                    </div>
+
+                    <div class="bent-grid-item tip-card">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number">04</span>
+                                <i class="fas fa-moon tip-icon text-indigo-500"></i>
+                            </div>
+                            <h3 class="tip-title-cn">晚饭不要太晚太重</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">LIGHT & EARLY DINNER</p>
+                        </div>
+                        <p class="tip-desc mt-auto">睡前3小时不进食，有助于睡眠和消化系统恢复。</p>
+                    </div>
+
+                    <div class="bent-grid-item tip-card">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number">05</span>
+                                <i class="fas fa-lemon tip-icon text-yellow-400"></i>
+                            </div>
+                            <h3 class="tip-title-cn">用淡茶、柠檬水替代奶茶与可乐</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">HEALTHY DRINKS</p>
+                        </div>
+                        <p class="tip-desc mt-auto">减糖减热量，也有助于口腔和肠胃健康。</p>
+                    </div>
+
+                    <div class="bent-grid-item tip-card highlight-glow-blue lg:col-span-3">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number">06</span>
+                                <i class="fas fa-carrot tip-icon text-red-500"></i>
+                            </div>
+                            <h3 class="tip-title-cn">饮食习惯：少糖、少盐、少油、多纤维</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">BALANCED DIET</p>
+                        </div>
+                        <p class="tip-desc mt-auto">降低身体负担，让大脑更清醒。 <span class="text-emphasis">LESS SUGAR, SALT, OIL, MORE FIBER.</span></p>
+                    </div>
+
+                    <div class="bent-grid-item tip-card lg:col-span-1">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number">07</span>
+                                <i class="fas fa-shoe-prints tip-icon text-lime-500 transform -rotate-45"></i>
+                            </div>
+                            <h3 class="tip-title-cn">午饭后散步15分钟</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">POST-LUNCH WALK</p>
+                        </div>
+                        <p class="tip-desc mt-auto">促进消化，预防餐后低血糖犯困。</p>
+                    </div>
+
+                    <div class="bent-grid-item tip-card lg:col-span-2">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number">08</span>
+                                <i class="fas fa-dumbbell tip-icon text-purple-500"></i>
+                            </div>
+                            <h3 class="tip-title-cn">每周至少一次轻运动</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">WEEKLY LIGHT EXERCISE</p>
+                        </div>
+                        <p class="tip-desc mt-auto">哪怕只是快走、爬楼梯，也有利于调节身心。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mental-wellness" class="py-16 md:py-24 px-6 md:px-12 bg-sky-50">
+            <div class="max-w-6xl mx-auto">
+                <div data-scroll-animate class="text-center mb-12 opacity-0">
+                    <h2 class="section-title">精神养生 <span class="text-sky-500">TIPS</span></h2>
+                    <p class="section-subtitle-en">MENTAL WELL-BEING: AVOIDING "HIGH CONCURRENCY" OF THE MIND</p>
+                    <div class="decorative-line mx-auto bg-sky-400"></div>
+                </div>
+
+                <div data-stagger-children-group class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bent-grid-item tip-card">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number text-sky-200">09</span>
+                                <i class="fas fa-wind tip-icon text-cyan-500"></i>
+                            </div>
+                            <h3 class="tip-title-cn">遇到卡点先深呼吸</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">DEEP BREATH ON BLOCKERS</p>
+                        </div>
+                        <p class="tip-desc mt-auto">别被bug搞炸心态，暂停一下可能更快解决。</p>
+                    </div>
+
+                    <div class="bent-grid-item tip-card highlight-glow-blue lg:col-span-2">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number text-sky-200">10</span>
+                                <i class="fas fa-power-off tip-icon text-slate-400"></i>
+                            </div>
+                            <h3 class="tip-title-cn">下班后尽量“断联”</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">DISCONNECT AFTER WORK</p>
+                        </div>
+                        <p class="tip-desc mt-auto">给自己时间切换状态，避免24小时“挂工”。 <span class="text-emphasis text-sky-600">CREATE BOUNDARIES.</span></p>
+                    </div>
+
+                    <div class="bent-grid-item tip-card lg:col-span-3"> <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number text-sky-200">11</span>
+                                <i class="fas fa-headphones-simple tip-icon text-teal-500"></i>
+                            </div>
+                            <h3 class="tip-title-cn">工作时听Lo-fi/自然音/白噪音</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">LO-FI / NATURE SOUNDS / WHITE NOISE</p>
+                        </div>
+                        <p class="tip-desc">稳定心率、提升专注，还能缓解焦躁情绪。</p>
+                        
+                        <div class="flex flex-wrap gap-4 mt-4 justify-center"> <a href="https://www.lofi.cafe/" target="_blank" rel="noopener noreferrer" class="text-sm text-sky-700 hover:underline flex items-center"> <i class="fas fa-music text-base mr-1"></i> Lo-fi Music
+                            </a>
+                            <a href="https://earth.fm/" target="_blank" rel="noopener noreferrer" class="text-sm text-sky-700 hover:underline flex items-center"> <i class="fas fa-cloud-sun text-base mr-1"></i> 自然音
+                            </a>
+                            <a href="https://www.ppbzy.com/" target="_blank" rel="noopener noreferrer" class="text-sm text-sky-700 hover:underline flex items-center"> <i class="fas fa-volume-high text-base mr-1"></i> 白噪音
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bent-grid-item tip-card lg:col-span-1"> <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number text-sky-200">12</span>
+                                <i class="fas fa-yin-yang tip-icon text-gray-500"></i>
+                            </div>
+                            <h3 class="tip-title-cn">不卷也不摆，保持稳定输出节奏</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">STABLE OUTPUT RHYTHM</p>
+                        </div>
+                        <p class="tip-desc mt-auto">内耗是最大消耗，稳定才是长期主义。 <span class="text-emphasis text-sky-600">CONSISTENCY OVER INTENSITY.</span></p>
+                        <img src="https://placehold.co/400x200/bae6fd/0c4a6e?text=Steady+Pace" alt="Steady Pace Concept" class="mt-4 rounded-lg w-full object-cover h-32">
+                    </div>
+
+                    <div class="bent-grid-item tip-card lg:col-span-1"> <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number text-sky-200">13</span>
+                                <i class="fas fa-bed tip-icon text-violet-500"></i>
+                            </div>
+                            <h3 class="tip-title-cn">睡前远离短视频</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">NO SHORT VIDEOS BEFORE BED</p>
+                        </div>
+                        <p class="tip-desc mt-auto">不熬夜比什么都有效，保持睡眠质量是根本。</p>
+                        <img src="https://placehold.co/400x200/e0cffc/4c1d95?text=Good+Sleep" alt="Good Sleep" class="mt-4 rounded-lg w-full object-cover h-32">
+                    </div>
+
+                    <div class="bent-grid-item tip-card lg:col-span-1"> <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number text-sky-200">14</span>
+                                <i class="fas fa-brain tip-icon text-pink-500"></i>
+                            </div>
+                            <h3 class="tip-title-cn">每天安排2小时“非工作时间”</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">2HR "NON-WORK" TIME DAILY</p>
+                        </div>
+                        <p class="tip-desc mt-auto">做饭、散步、聊天、冥想，让大脑彻底松弛。</p>
+                        <img src="https://placehold.co/400x200/fbcfe8/831843?text=Relax+Time" alt="Relax Time" class="mt-4 rounded-lg w-full object-cover h-32">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="work-habits" class="py-16 md:py-24 px-6 md:px-12 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <div data-scroll-animate class="text-center mb-12 opacity-0">
+                    <h2 class="section-title">工作习惯 <span class="text-amber-500">养生</span></h2>
+                    <p class="section-subtitle-en">WORK RHYTHM: TIPS FOR EFFICIENCY AND HEALTH</p>
+                    <div class="decorative-line mx-auto bg-amber-400"></div>
+                </div>
+
+                <div data-stagger-children-group class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bent-grid-item tip-card lg:col-span-1">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number text-amber-200">15</span>
+                                <i class="fas fa-stopwatch-20 tip-icon text-red-500"></i>
+                            </div>
+                            <h3 class="tip-title-cn">使用番茄钟法：25+5分钟</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">POMODORO TECHNIQUE: 25+5</p>
+                        </div>
+                        <p class="tip-desc mt-auto">避免持续过载，提升专注力。</p>
+                    </div>
+
+                    <div class="bent-grid-item tip-card lg:col-span-1"> <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number text-amber-200">16</span>
+                                <i class="fas fa-lightbulb tip-icon text-yellow-500"></i>
+                            </div>
+                            <h3 class="tip-title-cn">将重任务安排在脑力高峰期</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">PEAK BRAINPOWER TASKS</p>
+                        </div>
+                        <p class="tip-desc mt-auto">上午9-11点最适合处理逻辑/复杂问题。</p>
+                        </div>
+
+                    <div class="bent-grid-item tip-card lg:col-span-1">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number text-amber-200">17</span>
+                                <i class="fas fa-list-check tip-icon text-blue-500"></i>
+                            </div>
+                            <h3 class="tip-title-cn">写“今日清单”，分解任务减轻压力</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">DAILY TO-DO LISTS</p>
+                        </div>
+                        <p class="tip-desc mt-auto">清晰思路，有始有终，完成感增强。</p>
+                    </div>
+
+                    <div class="bent-grid-item tip-card lg:col-span-1">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number text-amber-200">18</span>
+                                <i class="fas fa-bug-slash tip-icon text-rose-500"></i>
+                            </div>
+                            <h3 class="tip-title-cn">bug分阶段处理，不要全堆在心上</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">PHASED BUG FIXING</p>
+                        </div>
+                        <p class="tip-desc mt-auto">拆解问题，让大脑保持“可控感”。</p>
+                    </div>
+
+                    <div class="bent-grid-item tip-card lg:col-span-1">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number text-amber-200">19</span>
+                                <i class="fas fa-battery-half tip-icon text-green-500"></i> </div>
+                            <h3 class="tip-title-cn">别逼自己时刻高效，身体会记仇</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">HEALTHY RHYTHM OVER CONSTANT EFFICIENCY</p>
+                        </div>
+                        <p class="tip-desc mt-auto">健康的节奏才是长久的产出方式，别硬撑。</p>
+                    </div>
+
+                    <div class="bent-grid-item tip-card lg:col-span-1"> <div>
+                            <div class="flex justify-between items-start">
+                                <span class="tip-number text-amber-200">20</span>
+                                <i class="fa-solid fa-lightbulb tip-icon text-orange-400"></i>
+                            </div>
+                            <h3 class="tip-title-cn">设立“发呆角”或白板角落</h3>
+                            <p class="tip-desc text-sm uppercase text-slate-500">IDEATION / CHILL CORNER</p>
+                        </div>
+                        <p class="tip-desc mt-auto">给灵感一个生长的空间，也给自己片刻放空。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="interaction-qa" class="py-16 md:py-24 px-6 md:px-12 bg-emerald-500 text-white">
+            <div class="max-w-5xl mx-auto">
+                <div data-scroll-animate class="text-center mb-12 opacity-0">
+                    <h2 class="text-5xl font-extrabold mb-3">互动 <span class="text-yellow-300">&</span> 金句</h2>
+                    <p class="text-xl uppercase tracking-wider opacity-80">INTERACTION & GOLDEN QUOTES</p>
+                </div>
+
+                <div data-stagger-children-group class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                    
+                    <div class="bent-grid-item quote-note-item opacity-0">
+                        <p class="text-xl md:text-2xl font-semibold text-center">“工作要紧，身体更要紧”</p>
+                    </div>
+                    <div class="bent-grid-item quote-note-item opacity-0">
+                        <p class="text-xl md:text-2xl font-semibold text-center">“效率是好事，但别忘了好好吃饭”</p>
+                    </div>
+                    <div class="bent-grid-item quote-note-item opacity-0">
+                        <p class="text-xl md:text-2xl font-semibold text-center">“别等身体报警，才想起照顾自己”</p>
+                    </div>
+                    <div class="bent-grid-item quote-note-item opacity-0">
+                        <p class="text-xl md:text-2xl font-semibold text-center">“枸杞不能光泡，休息也得安排上”</p>
+                    </div>
+                    <div class="bent-grid-item quote-note-item opacity-0">
+                        <p class="text-xl md:text-2xl font-semibold text-center">“照顾好自己，是每天最重要的事”</p>
+                    </div>
+                    <div class="bent-grid-item quote-note-item opacity-0">
+                        <p class="text-xl md:text-2xl font-semibold text-center">“多喝热水也许不万能，但总比熬夜强”</p>
+                    </div>
+                    <div class="bent-grid-item quote-note-item opacity-0">
+                        <p class="text-xl md:text-2xl font-semibold text-center">“心情好一点，效率就高一点”</p>
+                    </div>
+                    <div class="bent-grid-item quote-note-item opacity-0">
+                        <p class="text-xl md:text-2xl font-semibold text-center">“身心不过载，快乐才常在”</p>
+                    </div>
+                    <div class="bent-grid-item quote-note-item opacity-0">
+                        <p class="text-xl md:text-2xl font-semibold text-center">“偶尔停下来，是为了走更远”</p>
+                    </div>
+                    <div class="bent-grid-item quote-note-item opacity-0">
+                        <p class="text-xl md:text-2xl font-semibold text-center">“每天为自己留一点喘息的时间”</p>
+                    </div>
+                    <div class="bent-grid-item quote-note-item opacity-0">
+                        <p class="text-xl md:text-2xl font-semibold text-center">“别总等周末，今天也值得好好对待”</p>
+                    </div>
+                    <div class="bent-grid-item quote-note-item opacity-0">
+                        <p class="text-xl md:text-2xl font-semibold text-center">“身体不是工具，是本体”</p>
+                    </div>
+                </div>
+
+                </div>
+        </section>
+
+        <footer class="text-center py-8 bg-slate-800 text-slate-400">
+            <p>&copy; 2025 1step.dev. Stay Healthy, Work Happy!</p>
+        </footer>
+
+        <div id="lofi-player-floating" class="fixed bottom-4 right-4 z-50 w-56 md:w-64 lg:w-72 p-3 rounded-xl shadow-2xl border border-gray-200 flex flex-col items-center opacity-0 transform translate-y-20">
+            <p class="text-sm font-semibold text-slate-700 mb-2">Lo-fi Music (点击播放):</p>
+            <div class="audio-iframe-container w-full">
+                <iframe src="https://www.lofi.cafe/" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+            <p class="text-xs text-slate-500 mt-2 text-center">请手动点击播放器内部的按钮开始播放。</p>
+            <a href="https://www.lofi.cafe/" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-1.5 px-3 mt-3 text-sm bg-emerald-600 text-white font-semibold rounded-lg shadow-md hover:bg-emerald-700 transition-colors duration-300">
+                <i class="fas fa-external-link-alt text-sm mr-1"></i> 访问 Lo-fi.cafe
+            </a>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Ensure Motion One is loaded
+        if (typeof Motion === 'undefined') {
+            console.error('Motion One library not loaded.');
+            return;
+        }
+        const { animate, timeline, stagger } = Motion;
+
+        // --- Cover Animations ---
+        const coverItems = document.querySelectorAll('[data-motion-group="cover-content"] [data-motion-item]');
+        const coverDeco1 = document.querySelector('[data-motion-item="cover-deco1"]');
+        const coverDeco2 = document.querySelector('[data-motion-item="cover-deco2"]');
+        const scrollIndicator = document.querySelector('[data-motion-item="cover-scroll-indicator"]');
+
+        // Create a timeline for cover elements
+        const coverSequence = [];
+        coverItems.forEach((item, index) => {
+            coverSequence.push([item, { opacity: [0, 1], y: [20, 0] }, { duration: 0.6, delay: index * 0.15, at: "<" }])
+        });
+        if (coverDeco1) coverSequence.push([coverDeco1, { opacity: [0, 1], scale: [0.5, 1] }, { duration: 0.8, at: 0.2 }]);
+        if (coverDeco2) coverSequence.push([coverDeco2, { opacity: [0, 1], scale: [0.5, 1] }, { duration: 0.8, at: 0.3 }]);
+        if (scrollIndicator) {
+             coverSequence.push([scrollIndicator, { opacity: [0, 1] }, { duration: 0.5, at: 0.8 }]);
+             // The bounce animation is now handled directly in HTML with Tailwind's `animate-bounce` class
+             // No need for JS to animate it unless more complex control is required.
+        }
+        timeline(coverSequence).play();
+
+        // --- Scroll-triggered Animations ---
+        const elementsToAnimateOnScroll = document.querySelectorAll('[data-scroll-animate]');
+        elementsToAnimateOnScroll.forEach(element => {
+            // Set initial state using Motion One
+            animate(element, { opacity: 0, y: 50 }, { duration: 0 });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Animate in
+                        animate(element, { opacity: 1, y: 0 }, { duration: 1.0, ease: 'easeOut' }); // Slower entry
+                    } else {
+                        // Animate out smoothly
+                        animate(element, { opacity: 0, y: 50 }, { duration: 0.8, ease: 'easeIn' }); // Slower exit
+                    }
+                });
+            }, { threshold: 0.15 });
+            observer.observe(element);
+        });
+
+        // --- Staggered Children Animations ---
+        const staggerGroups = document.querySelectorAll('[data-stagger-children-group]');
+        staggerGroups.forEach(group => {
+            const children = Array.from(group.querySelectorAll('.bent-grid-item, .quote-note-item')); 
+            if (children.length === 0) return;
+
+            children.forEach(child => {
+                // For quote-note-item, preserve initial rotation when setting initial transform
+                const initialTransform = child.classList.contains('quote-note-item') ? child.style.transform + ' translateY(50px)' : 'translateY(50px)';
+                animate(child, { opacity: 0, transform: initialTransform }, { duration: 0 });
+            });
+
+            const groupObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Animate in with stagger
+                        animate(
+                            children,
+                            { opacity: 1, y: 0 },
+                            { delay: stagger(0.2, { start: 0.2 }), duration: 1.5, ease: 'easeOut' } // Slower stagger and duration
+                        );
+                    } else {
+                        // Animate out smoothly with stagger
+                        children.forEach(child => {
+                            const initialTransform = child.classList.contains('quote-note-item') ? child.style.transform.replace(/translateY\(.*?\)/, '') + ' translateY(50px)' : 'translateY(50px)';
+                            animate(child, { opacity: 0, transform: initialTransform }, { duration: 0.8, ease: 'easeIn' }); // Slower exit
+                        });
+                    }
+                });
+            }, { threshold: 0.1 });
+            groupObserver.observe(group);
+        });
+
+        // --- Golden Quotes Random Rotation ---
+        const quoteNotes = document.querySelectorAll('.quote-note-item');
+        quoteNotes.forEach(item => {
+            const randomRotation = (Math.random() * 6) - 3; // -3 to +3 degrees
+            item.style.transform = `rotate(${randomRotation}deg)`; 
+        });
+
+        // --- Add Hover Effects to Cards ---
+        const allInteractiveCards = document.querySelectorAll('.bent-grid-item, .quote-note-item');
+        allInteractiveCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                animate(card, { scale: 1.03, boxShadow: '0 15px 35px -5px rgba(0, 0, 0, 0.15), 0 15px 15px -5px rgba(0, 0, 0, 0.08)' }, { duration: 0.2, ease: 'easeOut' });
+            });
+            card.addEventListener('mouseleave', () => {
+                animate(card, { scale: 1, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }, { duration: 0.2, ease: 'easeOut' });
+            });
+        });
+
+        // --- Floating Lo-fi Player Animation ---
+        const lofiPlayerFloating = document.getElementById('lofi-player-floating');
+        if (lofiPlayerFloating) {
+            animate(lofiPlayerFloating, { opacity: [0, 1], y: [20, 0] }, { duration: 0.8, delay: 1.5, ease: 'easeOut' });
+        }
+    });
+    </script>
+</body>
+</html>
