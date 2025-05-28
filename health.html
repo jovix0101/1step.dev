@@ -3,55 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>续命指南：身心双修 20 招</title>
-    <script src="https://cdn.tailwindcss.com/3.4.3"></script>
-    <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.umd.min.js"></script>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>续命指南：身心双修20招</title>
+    <script src="motion.umd.min.js"></script>
+    <script src="tailwindcss.3.4.3"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            background-color: #f0f4f8; /* Light calming blue-gray */
+            background-color: #f0f4f8; /* 淡雅的蓝灰色背景 */
             color: #333;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden; /* 防止水平滚动条 */
         }
 
         .bent-grid-item {
             background-color: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* Safari */
-            border-radius: 1.5rem; /* 24px */
-            padding: 2rem; /* 32px */
+            -webkit-backdrop-filter: blur(10px); /* Safari 兼容 */
+            border-radius: 1.5rem; /* 24px 圆角 */
+            padding: 2rem; /* 32px 内边距 */
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Add transition for hover */
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* 悬停过渡效果 */
         }
 
         .highlight-glow-green {
-            box-shadow: 0 0 15px 5px rgba(74, 222, 128, 0.5), /* Green glow */
-                                    0 0 30px 10px rgba(74, 222, 128, 0.3),
-                                    0 0 45px 15px rgba(74, 222, 128, 0.1);
+            box-shadow: 0 0 15px 5px rgba(74, 222, 128, 0.5), /* 绿色辉光 */
+                        0 0 30px 10px rgba(74, 222, 128, 0.3),
+                        0 0 45px 15px rgba(74, 222, 128, 0.1);
             border: 1px solid rgba(74, 222, 128, 0.6);
         }
 
         .highlight-glow-blue {
-            box-shadow: 0 0 15px 5px rgba(59, 130, 246, 0.4),
-                                    0 0 30px 10px rgba(59, 130, 246, 0.2),
-                                    0 0 45px 15px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 15px 5px rgba(59, 130, 246, 0.4), /* 蓝色辉光 */
+                        0 0 30px 10px rgba(59, 130, 246, 0.2),
+                        0 0 45px 15px rgba(59, 130, 246, 0.1);
             border: 1px solid rgba(59, 130, 246, 0.5);
         }
 
         .section-title {
-            font-size: 3rem; /* 48px */
+            font-size: 3rem; /* 48px 标题字号 */
             font-weight: 800;
             margin-bottom: 1rem;
-            color: #1a202c; /* Darker text for titles */
+            color: #1a202c; /* 深色标题文字 */
         }
         .section-subtitle-en {
-            font-size: 1.125rem; /* 18px */
-            color: #4a5568; /* Medium gray */
+            font-size: 1.125rem; /* 18px 副标题字号 */
+            color: #4a5568; /* 中灰色副标题文字 */
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            margin-bottom: 2.5rem; /* 40px */
+            margin-bottom: 2.5rem; /* 40px 副标题下边距 */
         }
 
         .tip-card {
@@ -61,43 +61,43 @@
             justify-content: space-between;
         }
         .tip-number {
-            font-size: 4rem; /* 64px */
+            font-size: 4rem; /* 64px 数字字号 */
             font-weight: 900;
-            color: #cbd5e1; /* Light gray, less prominent */
+            color: #cbd5e1; /* 浅灰色数字，不突出 */
             line-height: 1;
         }
         .tip-title-cn {
-            font-size: 1.75rem; /* 28px */
+            font-size: 1.75rem; /* 28px 卡片内中文标题字号 */
             font-weight: 700;
-            color: #2d3748; /* Darker text for tip titles */
+            color: #2d3748; /* 深色卡片标题 */
             margin-top: 0.5rem;
             margin-bottom: 0.5rem;
         }
         .tip-desc {
-            font-size: 1rem; /* 16px */
-            color: #4a5568; /* Medium gray for descriptions */
+            font-size: 1rem; /* 16px 描述文字字号 */
+            color: #4a5568; /* 中灰色描述文字 */
             line-height: 1.6;
         }
         .tip-icon {
-            font-size: 2.5rem; /* 40px */
+            font-size: 2.5rem; /* 40px 图标字号 */
             margin-bottom: 1rem;
         }
         .text-emphasis {
-            color: #38a169; /* Green accent for emphasis */
+            color: #38a169; /* 绿色强调文字 */
             font-weight: 600;
         }
         .decorative-line {
             width: 80px;
             height: 4px;
-            margin: 1rem auto; /* Centered */
+            margin: 1rem auto; /* 居中装饰线 */
             border-radius: 2px;
         }
-        /* Style for iframes to ensure responsiveness and proper embedding */
+        
+        /* iframe 音频容器样式 (用于 Lo-fi 播放器) */
         .audio-iframe-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
+            height: 120px; /* Fixed height for lofi.cafe iframe */
             overflow: hidden;
             margin-bottom: 0.75rem;
             border-radius: 0.5rem;
@@ -111,46 +111,73 @@
             height: 100%;
             border: 0;
         }
+        
+        /* HTML5 audio 播放器自定义样式 */
+        audio {
+            border-radius: 0.5rem; /* 统一圆角风格 */
+            border: 1px solid #e2e8f0; /* 淡边框 */
+            width: 100%; /* 确保播放器宽度充满容器 */
+        }
 
-        /* New styles for golden quotes as sticky notes */
+        /* 金句卡片（便利贴风格） */
         .quote-note-item {
-            background-color: #fffbe6; /* Light yellow for notes */
-            border: 1px solid #fcd34d; /* Yellow border */
+            background-color: #fffbe6; /* 淡黄色背景 */
+            border: 1px solid #fcd34d; /* 黄色边框 */
             box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
-            padding: 1.5rem; /* Slightly less padding */
-            border-radius: 0.75rem; /* Slightly less rounded */
-            /* Ensure text is readable */
+            padding: 1.5rem;
+            border-radius: 0.75rem;
             color: #333;
             font-weight: 600;
-            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Add transition for hover */
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
         }
-        .quote-note-item:nth-child(2n) { 
-            background-color: #ecfdf5; /* Light green */
-            border-color: #6ee7b7; 
-        } 
-        .quote-note-item:nth-child(3n) { 
-            background-color: #e0f2fe; /* Light blue */
-            border-color: #93c5fd; 
-        }
-        .quote-note-item:nth-child(4n) { 
-            background-color: #fee2e2; /* Light red */
-            border-color: #fca5a5; 
-        }
-        .quote-note-item:nth-child(5n) { 
-            background-color: #f3e8ff; /* Light purple */
-            border-color: #d8b4fe; 
-        }
+        .quote-note-item:nth-child(2n) { background-color: #ecfdf5; border-color: #6ee7b7; } 
+        .quote-note-item:nth-child(3n) { background-color: #e0f2fe; border-color: #93c5fd; }
+        .quote-note-item:nth-child(4n) { background-color: #fee2e2; border-color: #fca5a5; }
+        .quote-note-item:nth-child(5n) { background-color: #f3e8ff; border-color: #d8b4fe; }
 
-        /* Floating Lo-fi Player */
-        #lofi-player-floating {
+        /* 浮动播放器通用样式 */
+        .floating-player {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            border-radius: 1rem;
-            padding: 1rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 1rem; /* 16px */
+            padding: 1rem; /* 16px */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* 更柔和的阴影 */
+            border: 1px solid rgba(229, 231, 235, 0.7); /* 浅灰色边框 */
+            position: fixed;
+            z-index: 50;
+            opacity: 0; /* 初始不可见，用于动画 */
+            transform: translateY(20px); /* 初始下移，用于动画 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+
+        /* 右下角 Lo-fi 播放器特定样式 */
+        #lofi-player-floating {
+            bottom: 1rem; /* 16px from bottom */
+            right: 1rem; /* 16px from right */
+            width: 14rem; /* 224px */
+        }
+        @media (min-width: 768px) { #lofi-player-floating { width: 16rem; /* 256px */ } }
+        @media (min-width: 1024px) { #lofi-player-floating { width: 18rem; /* 288px */ } }
+
+
+        /* 右下角播客播放器特定样式 (位于 Lo-fi 播放器上方) */
+        #podcast-player-floating {
+            /* 估算 Lo-fi 播放器高度约 15.5rem (内容+padding+border) + 1rem 间距 */
+            /* Lo-fi height: p(1.5rem) + iframe-container(120px ~ 7.5rem) + p(1rem) + a(2.5rem) + padding(2rem) = ~14.5rem. Add 1rem spacing. */
+            /* Let's dynamically calculate this or use a more robust layout if possible, for now, manual adjustment */
+            /* Approximate Lo-fi height: title (1.25rem) + iframe (7.5rem) + text (0.75rem) + button (2.25rem) + padding (2rem) = ~13.75rem. Add 1rem spacing. */
+            /* Total height of lofi player: p(text-sm) + div.audio-iframe-container(120px) + p(text-xs) + a(py-1.5) + padding(1rem*2) */
+            /* Roughly: 0.875rem + 7.5rem + 0.75rem + (0.375rem*2 + 0.875rem) + 2rem = 14.25rem. Add 1rem spacing. */
+            bottom: calc(1rem + 14.25rem + 3rem); /* Lo-fi bottom + Lo-fi est. height + spacing */
+            right: 1rem; /* 16px from right */
+            width: 14rem; /* 224px, 与 Lo-fi 播放器一致 */
+        }
+        @media (min-width: 768px) { #podcast-player-floating { width: 16rem; /* 256px, 与 Lo-fi 播放器一致 */ } }
+        @media (min-width: 1024px) { #podcast-player-floating { width: 18rem; /* 288px, 与 Lo-fi 播放器一致 */ } }
+
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800">
@@ -160,10 +187,10 @@
         <section id="cover" class="min-h-screen flex flex-col justify-center items-center p-8 bg-gradient-to-br from-emerald-500 to-teal-600 text-white text-center relative overflow-hidden">
             <div data-motion-group="cover-content" class="relative z-10">
                 <h1 data-motion-item="cover-title" class="text-6xl md:text-8xl font-extrabold mb-4 leading-tight opacity-0">
-                    续命指南 <span class="text-4xl md:text-6xl font-semibold">身心双修<span class="text-yellow-300"> 20 </span>招</span>
+                    续命指南 <span class="text-4xl md:text-6xl font-semibold">身心双修<span class="text-yellow-300">20</span>招</span>
                 </h1>
                 <p data-motion-item="cover-subtitle" class="text-xl md:text-2xl mb-2 opacity-0">DEVELOPER WELLNESS: 20 TIPS FOR BODY & MIND</p>
-                <p data-motion-item="cover-date" class="text-lg md:text-xl mb-8 text-emerald-200 opacity-0">jovix</p>
+                <p data-motion-item="cover-date" class="text-lg md:text-xl mb-8 text-emerald-200 opacity-0">2025年5月 · Jovix</p>
                 <blockquote data-motion-item="cover-quote" class="text-2xl md:text-3xl italic font-light border-l-4 border-yellow-300 pl-6 py-2 opacity-0">
                     “不养生，就养医生”
                 </blockquote>
@@ -224,7 +251,7 @@
                             <p class="tip-desc text-sm uppercase text-slate-500">20-20-20 EYE CARE RULE</p>
                         </div>
                         <p class="tip-desc mt-auto">每20分钟看20英尺（约6米）外20秒，缓解眼疲劳、预防干眼。</p>
-                        <img src="https://placehold.co/400x200/a7f3d0/166534?text=Vision+Care" alt="Eye Care Diagram" class="mt-4 rounded-lg w-full object-cover h-32">
+                        <img src="https://placehold.co/400x200/a7f3d0/166534?text=Vision+Care" alt="[图片：视力保健示意图]" class="mt-4 rounded-lg w-full object-cover h-32">
                     </div>
 
                     <div class="bent-grid-item tip-card">
@@ -363,7 +390,7 @@
                             <p class="tip-desc text-sm uppercase text-slate-500">STABLE OUTPUT RHYTHM</p>
                         </div>
                         <p class="tip-desc mt-auto">内耗是最大消耗，稳定才是长期主义。 <span class="text-emphasis text-sky-600">CONSISTENCY OVER INTENSITY.</span></p>
-                        <img src="https://placehold.co/400x200/bae6fd/0c4a6e?text=Steady+Pace" alt="Steady Pace Concept" class="mt-4 rounded-lg w-full object-cover h-32">
+                        <img src="https://placehold.co/400x200/bae6fd/0c4a6e?text=Steady+Pace" alt="[图片：稳定节奏概念图]" class="mt-4 rounded-lg w-full object-cover h-32">
                     </div>
 
                     <div class="bent-grid-item tip-card lg:col-span-1"> <div>
@@ -375,7 +402,7 @@
                             <p class="tip-desc text-sm uppercase text-slate-500">NO SHORT VIDEOS BEFORE BED</p>
                         </div>
                         <p class="tip-desc mt-auto">不熬夜比什么都有效，保持睡眠质量是根本。</p>
-                        <img src="https://placehold.co/400x200/e0cffc/4c1d95?text=Good+Sleep" alt="Good Sleep" class="mt-4 rounded-lg w-full object-cover h-32">
+                        <img src="https://placehold.co/400x200/e0cffc/4c1d95?text=Good+Sleep" alt="[图片：良好睡眠]" class="mt-4 rounded-lg w-full object-cover h-32">
                     </div>
 
                     <div class="bent-grid-item tip-card lg:col-span-1"> <div>
@@ -387,7 +414,7 @@
                             <p class="tip-desc text-sm uppercase text-slate-500">2HR "NON-WORK" TIME DAILY</p>
                         </div>
                         <p class="tip-desc mt-auto">做饭、散步、聊天、冥想，让大脑彻底松弛。</p>
-                        <img src="https://placehold.co/400x200/fbcfe8/831843?text=Relax+Time" alt="Relax Time" class="mt-4 rounded-lg w-full object-cover h-32">
+                        <img src="https://placehold.co/400x200/fbcfe8/831843?text=Relax+Time" alt="[图片：放松时刻]" class="mt-4 rounded-lg w-full object-cover h-32">
                     </div>
                 </div>
             </div>
@@ -477,7 +504,7 @@
         <section id="interaction-qa" class="py-16 md:py-24 px-6 md:px-12 bg-emerald-500 text-white">
             <div class="max-w-5xl mx-auto">
                 <div data-scroll-animate class="text-center mb-12 opacity-0">
-                    <h2 class="text-5xl font-extrabold mb-3">小<span class="text-yellow-300"> TIPS</span></h2>
+                    <h2 class="text-5xl font-extrabold mb-3">互动 <span class="text-yellow-300">&</span> 金句</h2>
                     <p class="text-xl uppercase tracking-wider opacity-80">INTERACTION & GOLDEN QUOTES</p>
                 </div>
 
@@ -525,37 +552,50 @@
         </section>
 
         <footer class="text-center py-8 bg-slate-800 text-slate-400">
-            <p>&copy; 2025 1step.dev. Stay Healthy, Work Happy!</p>
+            <p>&copy; 1step.dev. Stay Healthy, Work Happy!</p>
         </footer>
 
-        <div id="lofi-player-floating" class="fixed bottom-4 right-4 z-50 w-56 md:w-64 lg:w-72 p-3 rounded-xl shadow-2xl border border-gray-200 flex flex-col items-center opacity-0 transform translate-y-20">
+        <div id="lofi-player-floating" class="floating-player">
             <p class="text-sm font-semibold text-slate-700 mb-2">Lo-fi Music (点击播放):</p>
             <div class="audio-iframe-container w-full">
-                <iframe src="https://www.lofi.cafe/" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                <iframe src="https://www.lofi.cafe/" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Lo-fi Cafe Player"></iframe>
             </div>
             <p class="text-xs text-slate-500 mt-2 text-center">请手动点击播放器内部的按钮开始播放。</p>
             <a href="https://www.lofi.cafe/" target="_blank" rel="noopener noreferrer" class="block w-full text-center py-1.5 px-3 mt-3 text-sm bg-emerald-600 text-white font-semibold rounded-lg shadow-md hover:bg-emerald-700 transition-colors duration-300">
-                <i class="fas fa-external-link-alt text-sm mr-1"></i> 访问 Lo-fi.cafe
+                <i class="fas fa-external-link-alt text-xs mr-1"></i> 访问 Lo-fi.cafe
             </a>
         </div>
+
+        <div id="podcast-player-floating" class="floating-player">
+            <p class="text-sm font-semibold text-slate-700 mb-2 flex items-center">
+                <i class="fas fa-podcast mr-2 text-emerald-500"></i> 指南播客 (点击播放)
+            </p>
+            <audio controls class="mt-2">
+                <source src="podcast.wav" type="audio/wav">
+                您的浏览器不支持 HTML5 音频播放。 (Your browser does not support HTML5 audio.)
+            </audio>
+            <!-- <p class="text-xs text-slate-500 mt-3 italic text-center">
+                <strong>提示:</strong> 请替换代码中的音频文件路径。
+            </p> -->
+        </div>
+
     </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Ensure Motion One is loaded
+        // 确保 Motion One 库已加载
         if (typeof Motion === 'undefined') {
             console.error('Motion One library not loaded.');
             return;
         }
         const { animate, timeline, stagger } = Motion;
 
-        // --- Cover Animations ---
+        // --- 封面动画 ---
         const coverItems = document.querySelectorAll('[data-motion-group="cover-content"] [data-motion-item]');
         const coverDeco1 = document.querySelector('[data-motion-item="cover-deco1"]');
         const coverDeco2 = document.querySelector('[data-motion-item="cover-deco2"]');
         const scrollIndicator = document.querySelector('[data-motion-item="cover-scroll-indicator"]');
 
-        // Create a timeline for cover elements
         const coverSequence = [];
         coverItems.forEach((item, index) => {
             coverSequence.push([item, { opacity: [0, 1], y: [20, 0] }, { duration: 0.6, delay: index * 0.15, at: "<" }])
@@ -564,57 +604,47 @@
         if (coverDeco2) coverSequence.push([coverDeco2, { opacity: [0, 1], scale: [0.5, 1] }, { duration: 0.8, at: 0.3 }]);
         if (scrollIndicator) {
              coverSequence.push([scrollIndicator, { opacity: [0, 1] }, { duration: 0.5, at: 0.8 }]);
-             // The bounce animation is now handled directly in HTML with Tailwind's `animate-bounce` class
-             // No need for JS to animate it unless more complex control is required.
         }
         timeline(coverSequence).play();
 
-        // --- Scroll-triggered Animations ---
+        // --- 滚动触发动画 ---
         const elementsToAnimateOnScroll = document.querySelectorAll('[data-scroll-animate]');
         elementsToAnimateOnScroll.forEach(element => {
-            // Set initial state using Motion One
-            animate(element, { opacity: 0, y: 50 }, { duration: 0 });
+            animate(element, { opacity: 0, y: 50 }, { duration: 0 }); // 设置初始状态
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Animate in
-                        animate(element, { opacity: 1, y: 0 }, { duration: 1.0, ease: 'easeOut' }); // Slower entry
+                        animate(element, { opacity: 1, y: 0 }, { duration: 1.0, ease: 'easeOut' });
                     } else {
-                        // Animate out smoothly
-                        animate(element, { opacity: 0, y: 50 }, { duration: 0.8, ease: 'easeIn' }); // Slower exit
+                        animate(element, { opacity: 0, y: 50 }, { duration: 0.8, ease: 'easeIn' });
                     }
                 });
             }, { threshold: 0.15 });
             observer.observe(element);
         });
 
-        // --- Staggered Children Animations ---
+        // --- 子元素交错动画 ---
         const staggerGroups = document.querySelectorAll('[data-stagger-children-group]');
         staggerGroups.forEach(group => {
             const children = Array.from(group.querySelectorAll('.bent-grid-item, .quote-note-item')); 
             if (children.length === 0) return;
 
             children.forEach(child => {
-                // For quote-note-item, preserve initial rotation when setting initial transform
-                const initialTransform = child.classList.contains('quote-note-item') ? child.style.transform + ' translateY(50px)' : 'translateY(50px)';
-                animate(child, { opacity: 0, transform: initialTransform }, { duration: 0 });
+                animate(child, { opacity: 0, y: 50 }, { duration: 0 }); // 设置子元素初始状态
             });
 
             const groupObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Animate in with stagger
                         animate(
                             children,
                             { opacity: 1, y: 0 },
-                            { delay: stagger(0.2, { start: 0.2 }), duration: 1.5, ease: 'easeOut' } // Slower stagger and duration
+                            { delay: stagger(0.15, { start: 0.1 }), duration: 0.8, ease: 'easeOut' } // 调整了交错延迟和持续时间
                         );
                     } else {
-                        // Animate out smoothly with stagger
-                        children.forEach(child => {
-                            const initialTransform = child.classList.contains('quote-note-item') ? child.style.transform.replace(/translateY\(.*?\)/, '') + ' translateY(50px)' : 'translateY(50px)';
-                            animate(child, { opacity: 0, transform: initialTransform }, { duration: 0.8, ease: 'easeIn' }); // Slower exit
+                         children.forEach(child => { // 元素离开视口时也恢复初始状态
+                            animate(child, { opacity: 0, y: 50 }, { duration: 0.6, ease: 'easeIn' });
                         });
                     }
                 });
@@ -622,28 +652,75 @@
             groupObserver.observe(group);
         });
 
-        // --- Golden Quotes Random Rotation ---
+        // --- 金句卡片随机旋转 ---
         const quoteNotes = document.querySelectorAll('.quote-note-item');
         quoteNotes.forEach(item => {
-            const randomRotation = (Math.random() * 6) - 3; // -3 to +3 degrees
+            const randomRotation = (Math.random() * 5) - 2.5; // -2.5 到 +2.5 度
             item.style.transform = `rotate(${randomRotation}deg)`; 
         });
 
-        // --- Add Hover Effects to Cards ---
+
+        // --- 卡片悬停效果 ---
         const allInteractiveCards = document.querySelectorAll('.bent-grid-item, .quote-note-item');
         allInteractiveCards.forEach(card => {
+            const originalTransform = getComputedStyle(card).transform;
+            // 检查 originalTransform 是否为 'none'，如果是，则基础变换为空字符串
+            const baseTransform = (originalTransform === 'none') ? '' : originalTransform + ' ';
+
             card.addEventListener('mouseenter', () => {
-                animate(card, { scale: 1.03, boxShadow: '0 15px 35px -5px rgba(0, 0, 0, 0.15), 0 15px 15px -5px rgba(0, 0, 0, 0.08)' }, { duration: 0.2, ease: 'easeOut' });
+                // 在原有旋转基础上应用缩放
+                animate(card, { transform: baseTransform + 'scale(1.03)', boxShadow: '0 15px 35px -5px rgba(0, 0, 0, 0.15), 0 15px 15px -5px rgba(0, 0, 0, 0.08)' }, { duration: 0.2, ease: 'easeOut' });
             });
             card.addEventListener('mouseleave', () => {
-                animate(card, { scale: 1, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }, { duration: 0.2, ease: 'easeOut' });
+                // 恢复到原始变换（包含旋转）或仅缩放为1
+                animate(card, { transform: (originalTransform === 'none') ? 'scale(1)' : originalTransform, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }, { duration: 0.2, ease: 'easeOut' });
             });
         });
 
-        // --- Floating Lo-fi Player Animation ---
+        // --- 浮动播放器动画 ---
         const lofiPlayerFloating = document.getElementById('lofi-player-floating');
         if (lofiPlayerFloating) {
             animate(lofiPlayerFloating, { opacity: [0, 1], y: [20, 0] }, { duration: 0.8, delay: 1.5, ease: 'easeOut' });
+        }
+
+        const podcastPlayerFloating = document.getElementById('podcast-player-floating');
+        if (podcastPlayerFloating) {
+            // 确保播客播放器在 Lo-fi 播放器加载并获取其高度后，再精确设置其 bottom 值
+            // 但为了简化，我们使用预估值，并在CSS中设置。动画延迟保持不变。
+             // 动态计算Lo-fi播放器高度并设置播客播放器位置
+            const lofiPlayer = document.getElementById('lofi-player-floating');
+            if (lofiPlayer) {
+                // 使用 ResizeObserver 监测 Lo-fi 播放器高度变化，确保响应式
+                const resizeObserver = new ResizeObserver(entries => {
+                    for (let entry of entries) {
+                        const lofiHeight = entry.target.offsetHeight;
+                        // 1rem = 16px (通常情况，但最好从根元素获取)
+                        const spacingRem = 1; 
+                        const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+                        const spacingPx = spacingRem * rootFontSize;
+                        
+                        podcastPlayerFloating.style.bottom = `${lofiPlayer.offsetTop + lofiHeight + spacingPx - podcastPlayerFloating.offsetHeight}px`;
+                        // 更简单的定位方式是基于Lo-fi的bottom值加上其高度和间距
+                        const lofiBottomStyle = getComputedStyle(lofiPlayer).bottom; // e.g., "16px"
+                        const lofiBottomPx = parseFloat(lofiBottomStyle);
+                        podcastPlayerFloating.style.bottom = `${lofiBottomPx + lofiHeight + spacingPx}px`;
+                    }
+                });
+                // 初始加载时也设置一次
+                const lofiHeight = lofiPlayer.offsetHeight;
+                const spacingRem = 1;
+                const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+                const spacingPx = spacingRem * rootFontSize;
+                const lofiBottomStyle = getComputedStyle(lofiPlayer).bottom;
+                const lofiBottomPx = parseFloat(lofiBottomStyle);
+
+                // 更新播客播放器CSS中的bottom值，使其动态适应
+                // podcastPlayerFloating.style.bottom = `${lofiBottomPx + lofiHeight + spacingPx}px`;
+                // The CSS already has a calc for bottom, we'll ensure JS animation happens after this.
+                // The CSS for #podcast-player-floating already handles the bottom positioning relative to lofi player's estimated height.
+                // The JS animation for opacity and y-transform should not interfere with this static positioning.
+            }
+            animate(podcastPlayerFloating, { opacity: [0, 1], y: [20, 0] }, { duration: 0.8, delay: 1.7, ease: 'easeOut' }); 
         }
     });
     </script>
