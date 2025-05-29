@@ -631,7 +631,9 @@
             if (children.length === 0) return;
 
             children.forEach(child => {
-                animate(child, { opacity: 0, y: 50 }, { duration: 0 }); // 设置子元素初始状态
+                // For quote-note-item, preserve initial rotation when setting initial transform
+                const initialTransform = child.classList.contains('quote-note-item') ? child.style.transform + ' translateY(50px)' : 'translateY(50px)';
+                animate(child, { opacity: 0, transform: initialTransform }, { duration: 0 });
             });
 
             const groupObserver = new IntersectionObserver((entries) => {
@@ -640,11 +642,13 @@
                         animate(
                             children,
                             { opacity: 1, y: 0 },
-                            { delay: stagger(0.15, { start: 0.1 }), duration: 0.8, ease: 'easeOut' } // 调整了交错延迟和持续时间
+                            { delay: stagger(0.2, { start: 0.2 }), duration: 1.5, ease: 'easeOut' } // Slower stagger and duration
                         );
                     } else {
-                         children.forEach(child => { // 元素离开视口时也恢复初始状态
-                            animate(child, { opacity: 0, y: 50 }, { duration: 0.6, ease: 'easeIn' });
+                        // Animate out smoothly with stagger
+                        children.forEach(child => {
+                            const initialTransform = child.classList.contains('quote-note-item') ? child.style.transform.replace(/translateY\(.*?\)/, '') + ' translateY(50px)' : 'translateY(50px)';
+                            animate(child, { opacity: 0, transform: initialTransform }, { duration: 0.8, ease: 'easeIn' }); // Slower exit
                         });
                     }
                 });
@@ -655,7 +659,7 @@
         // --- 金句卡片随机旋转 ---
         const quoteNotes = document.querySelectorAll('.quote-note-item');
         quoteNotes.forEach(item => {
-            const randomRotation = (Math.random() * 5) - 2.5; // -2.5 到 +2.5 度
+            const randomRotation = (Math.random() * 6) - 3; // -3 to +3 degrees
             item.style.transform = `rotate(${randomRotation}deg)`; 
         });
 
@@ -663,17 +667,11 @@
         // --- 卡片悬停效果 ---
         const allInteractiveCards = document.querySelectorAll('.bent-grid-item, .quote-note-item');
         allInteractiveCards.forEach(card => {
-            const originalTransform = getComputedStyle(card).transform;
-            // 检查 originalTransform 是否为 'none'，如果是，则基础变换为空字符串
-            const baseTransform = (originalTransform === 'none') ? '' : originalTransform + ' ';
-
             card.addEventListener('mouseenter', () => {
-                // 在原有旋转基础上应用缩放
-                animate(card, { transform: baseTransform + 'scale(1.03)', boxShadow: '0 15px 35px -5px rgba(0, 0, 0, 0.15), 0 15px 15px -5px rgba(0, 0, 0, 0.08)' }, { duration: 0.2, ease: 'easeOut' });
+                animate(card, { scale: 1.03, boxShadow: '0 15px 35px -5px rgba(0, 0, 0, 0.15), 0 15px 15px -5px rgba(0, 0, 0, 0.08)' }, { duration: 0.2, ease: 'easeOut' });
             });
             card.addEventListener('mouseleave', () => {
-                // 恢复到原始变换（包含旋转）或仅缩放为1
-                animate(card, { transform: (originalTransform === 'none') ? 'scale(1)' : originalTransform, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }, { duration: 0.2, ease: 'easeOut' });
+                animate(card, { scale: 1, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }, { duration: 0.2, ease: 'easeOut' });
             });
         });
 
