@@ -1,0 +1,451 @@
+
+:root {
+  /* Power Button Skewmorphic Style */
+  --power-button-bg-start: #e9e9ed;
+  --power-button-bg-end: #c8c8cd;
+  --power-button-border-color: #b0b0b5;
+  --power-button-icon-color: #3d3d3f;
+  --power-button-hover-brightness: 1.04;
+  --power-button-active-brightness: 0.96;
+  --power-button-glow-color: rgba(200, 200, 230, 0.4);
+  --power-button-size: 72px;
+  --power-button-icon-svg-size: 28px;
+
+  /* RGB Light Strip */
+  --power-light-strip-color: transparent;
+  --power-light-strip-width: 4.5px;
+  --power-button-threshold-flash-opacity: 0.8;
+
+  --power-prompt-text-color: #a0a0a5;
+
+        /* General Theme Variables */
+        --font-family: 'Consolas', 'Courier New', monospace;
+        --background-color: #282a36;
+        --text-color: #f8f8f2;
+        --font-size: 1em;
+        --footer-text-color: #999;
+        --glow-color: rgba(59, 130, 246, 0.5);
+      }
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background-color);
+  background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+  color: var(--text-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#terminal {
+  width: 90%;
+  max-width: 850px;
+  height: 75vh;
+  min-height: 450px;
+  background-color: var(--window-bg-color);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px var(--glow-color);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform-origin: center center;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+#terminal:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 30px var(--glow-color);
+}
+
+#terminal.shutting-down {
+  animation: vertical-off 0.6s forwards cubic-bezier(0.55, 0.085, 0.68, 0.53);
+}
+#terminal.powering-on {
+  animation: vertical-on 0.6s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes vertical-off {
+  0% {
+    transform: scaleY(1);
+    opacity: 1;
+    max-height: 75vh;
+  }
+  70% {
+    transform: scaleY(0.01);
+    opacity: 0.7;
+    max-height: 75vh;
+  }
+  99% {
+    transform: scaleY(0);
+    opacity: 0;
+    max-height: 0;
+  }
+  100% {
+    transform: scaleY(0);
+    opacity: 0;
+    max-height: 0;
+  }
+}
+@keyframes vertical-on {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+    max-height: 0;
+    display: flex !important;
+  }
+  30% {
+    transform: scaleY(0.01);
+    opacity: 0.7;
+    max-height: 75vh;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+    max-height: 75vh;
+  }
+}
+
+#terminal-header {
+  background-color: var(--header-bg);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  user-select: none;
+  flex-shrink: 0;
+  font-family: var(--font-family);
+}
+.dot {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+}
+.dot.red {
+  background-color: #ff5f57;
+  animation-delay: 0s;
+}
+.dot.yellow {
+  background-color: #febc2e;
+  animation-delay: 0.2s;
+}
+.dot.green {
+  background-color: #28c840;
+  animation-delay: 0.4s;
+}
+.title {
+  color: #bbb;
+  font-size: 0.9em;
+  margin-left: 15px;
+}
+
+#terminal-body {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  word-wrap: break-word;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+  user-select: text; /* Allow text selection */
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+#terminal-body::-webkit-scrollbar {
+  width: 8px;
+}
+#terminal-body::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color);
+  border-radius: 4px;
+}
+#terminal-body::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color);
+  border-radius: 4px;
+  border: 2px solid var(--scrollbar-track-color);
+}
+#terminal-body::-webkit-scrollbar-thumb:hover {
+  background-color: #555869;
+}
+
+.terminal-line {
+  display: flex;
+  margin-bottom: 2px;
+}
+.prompt {
+  margin-right: 8px;
+  white-space: nowrap;
+}
+.prompt-user {
+  color: var(--prompt-user-color);
+}
+.prompt-path {
+  color: var(--prompt-path-color);
+}
+.prompt-symbol {
+  color: var(--prompt-symbol-color);
+}
+#command-input-container {
+  display: flex;
+  width: 100%;
+}
+#command-input {
+  flex-grow: 1;
+  background-color: transparent;
+  border: none;
+  color: var(--text-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  outline: none;
+  padding: 0;
+  animation: caret-blink 1.2s step-end infinite;
+}
+@keyframes caret-blink {
+  0%,
+  100% {
+    caret-color: var(--caret-color);
+  }
+  50% {
+    caret-color: transparent;
+  }
+}
+.command-echo {
+  color: var(--command-echo-color);
+}
+.output {
+  color: var(--output-color);
+  white-space: pre-wrap;
+}
+.output-error {
+  color: var(--error-color);
+}
+.output-link {
+  color: var(--link-color);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.output-link:hover {
+  filter: brightness(1.2);
+}
+.output-highlight {
+  color: var(--highlight-color);
+}
+.ascii-art {
+  color: var(--prompt-user-color);
+  font-family: 'Courier New', Courier, monospace;
+  white-space: pre;
+  margin-bottom: 10px;
+  line-height: 1.1;
+}
+.output-avatar img {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 50%;
+  border: 2px solid var(--prompt-path-color);
+  margin: 10px 0;
+  display: block;
+}
+
+/* Power Button Area */
+#power-button-area {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  opacity: 0;
+  transition: opacity 0.5s 0.2s ease-in-out;
+  user-select: none;
+}
+#power-button-area.visible {
+  opacity: 1;
+}
+
+#power-on-btn {
+  width: var(--power-button-size);
+  height: var(--power-button-size);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--power-button-icon-color);
+  background: linear-gradient(to bottom, var(--power-button-bg-start) 0%, var(--power-button-bg-end) 100%);
+  border: 1px solid var(--power-button-border-color);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 1.5px 1px rgba(255, 255, 255, 0.5),
+    inset 0 -1.5px 1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.1s ease-out, box-shadow 0.15s ease-out, filter 0.15s ease-out;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#power-button-icon-svg {
+  width: var(--power-button-icon-svg-size);
+  height: var(--power-button-icon-svg-size);
+  fill: currentColor;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.2s ease-out;
+}
+
+#power-button-light-strip-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes rgb-light-strip-animation {
+  0% {
+    stroke: hsl(0, 100%, 60%);
+  }
+  16% {
+    stroke: hsl(60, 100%, 60%);
+  }
+  33% {
+    stroke: hsl(120, 100%, 60%);
+  }
+  50% {
+    stroke: hsl(180, 100%, 60%);
+  }
+  66% {
+    stroke: hsl(240, 100%, 60%);
+  }
+  83% {
+    stroke: hsl(300, 100%, 60%);
+  }
+  100% {
+    stroke: hsl(0, 100%, 60%);
+  }
+}
+
+#power-button-light-strip-circle {
+  fill: none;
+  stroke: var(--power-light-strip-color);
+  stroke-width: var(--power-light-strip-width);
+  transition: stroke-dashoffset 1s cubic-bezier(0.35, 0, 0.25, 1);
+}
+#power-button-light-strip-circle.active {
+  animation: rgb-light-strip-animation 3s linear infinite;
+}
+#power-button-light-strip-circle.retracting {
+  transition: stroke-dashoffset 0.3s cubic-bezier(0.6, 0.04, 0.98, 0.335), stroke 0.1s linear;
+  animation: none;
+}
+
+@keyframes pulse-button-glow-animation {
+  0% {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 1.5px 1px rgba(255, 255, 255, 0.5),
+      inset 0 -1.5px 1px rgba(0, 0, 0, 0.1), 0 0 0px 0px var(--power-button-glow-color);
+  }
+  50% {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 1.5px 1px rgba(255, 255, 255, 0.5),
+      inset 0 -1.5px 1px rgba(0, 0, 0, 0.1), 0 0 16px 6px var(--power-button-glow-color);
+  }
+  100% {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 1.5px 1px rgba(255, 255, 255, 0.5),
+      inset 0 -1.5px 1px rgba(0, 0, 0, 0.1), 0 0 0px 0px var(--power-button-glow-color);
+  }
+}
+
+#power-button-area.visible #power-on-btn:not(.interaction-held):not(.threshold-met) {
+  animation: pulse-button-glow-animation 2.5s infinite ease-in-out;
+}
+
+#power-on-btn.interaction-held {
+  animation: none;
+  transform: scale(0.95) translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 2px 3px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  filter: brightness(var(--power-button-active-brightness));
+}
+#power-on-btn.interaction-held #power-button-icon-svg {
+  transform: scale(0.9);
+}
+
+@keyframes threshold-flash-animation {
+  0%,
+  100% {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 2px 3px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 0 0px hsla(0, 0%, 100%, 0);
+    transform: scale(0.95) translateY(1px);
+  }
+  50% {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 2px 3px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 0 0 10px hsla(0, 0%, 100%, var(--power-button-threshold-flash-opacity));
+    transform: scale(1.03) translateY(0px);
+  }
+}
+#power-on-btn.threshold-met {
+  animation: threshold-flash-animation 0.35s ease-out forwards;
+}
+
+#power-on-prompt {
+  margin-top: 18px;
+  font-size: 0.9em;
+  color: var(--power-prompt-text-color);
+  font-family: var(--font-family);
+  letter-spacing: 0.3px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+#power-button-area.visible #power-on-prompt {
+  opacity: 0.8;
+}
+
+#developer-info {
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.8em;
+  color: var(--footer-text-color);
+  opacity: 0.7;
+  z-index: 5;
+  pointer-events: auto; /* Change to auto to allow link clicks */
+  font-family: var(--font-family);
+}
+
+/* New style for the footer blog link */
+.footer-link {
+  color: inherit; /* Inherit color from #developer-info */
+  text-decoration: none;
+  pointer-events: auto; /* Ensure this specific link is clickable */
+}
+.footer-link:hover {
+  text-decoration: underline;
+  filter: brightness(1.2); /* Slightly brighten on hover */
+}
