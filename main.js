@@ -9,7 +9,6 @@ const developerInfoFooter = document.getElementById('developer-info');
 const powerButtonArea = document.getElementById('power-button-area');
 const powerOnButton = document.getElementById('power-on-btn');
 const lightStripCircle = document.getElementById('power-button-light-strip-circle');
-const powerOnPrompt = document.getElementById('power-on-prompt');
 
 let commandInput;
 let currentInputLineDiv;
@@ -23,19 +22,123 @@ let lightStripCircumference = 0;
 
 const username = 'jovix';
 const hostname = '1step.dev';
-let currentPath = '~';
+const terminalState = { currentPath: '~' };
+const STORAGE_KEYS = {
+    history: 'terminalHistory',
+    currentPath: 'terminalCurrentPath',
+    draft: 'terminalInputDraft'
+};
+const COMPLETABLE_PATH_COMMANDS = ['cd', 'ls', 'cat'];
+const MAX_PERSISTED_HISTORY = 200;
+
+let commandInlineSuggestion;
+let completionSession = {
+    type: null,
+    entries: [],
+    index: -1,
+    originalValue: '',
+    lastAppliedValue: ''
+};
+let initialInputDraft = '';
+let shouldApplyDraftOnNextInput = true;
 
 export function getUsername() { return username; }
 export function getHostname() { return hostname; }
-export function getCurrentPath() { return currentPath; }
+export function getCurrentPath() { return terminalState.currentPath; }
 export function getCommandHistory() { return commandHistory; }
-export function setCommandHistory(newHistory) { commandHistory = newHistory; }
+export function setCommandHistory(newHistory) {
+    commandHistory = Array.isArray(newHistory) ? newHistory : [];
+    persistCommandHistory();
+}
 export function getHistoryIndex() { return historyIndex; }
 export function setHistoryIndex(newIndex) { historyIndex = newIndex; }
+export function setCurrentPath(newPath, options = {}) {
+    terminalState.currentPath = newPath;
+    updateTerminalTitle();
+    if (!options.skipPersist) {
+      persistCurrentPath();
+    }
+}
+
+function safeStorageGet(key) {
+    try {
+      return localStorage.getItem(key);
+    } catch (_) {
+      return null;
+    }
+}
+
+function safeStorageSet(key, value) {
+    try {
+      localStorage.setItem(key, value);
+    } catch (_) {}
+}
+
+function safeStorageRemove(key) {
+    try {
+      localStorage.removeItem(key);
+    } catch (_) {}
+}
+
+function persistCommandHistory() {
+    safeStorageSet(STORAGE_KEYS.history, JSON.stringify(commandHistory.slice(0, MAX_PERSISTED_HISTORY)));
+}
+
+function persistCurrentPath() {
+    safeStorageSet(STORAGE_KEYS.currentPath, terminalState.currentPath);
+}
+
+function persistCommandDraft(value) {
+    if (!value) {
+      safeStorageRemove(STORAGE_KEYS.draft);
+      return;
+    }
+    safeStorageSet(STORAGE_KEYS.draft, value);
+}
+
+function clearPersistedDraft() {
+    initialInputDraft = '';
+    shouldApplyDraftOnNextInput = false;
+    safeStorageRemove(STORAGE_KEYS.draft);
+}
+
+function hydrateSessionState() {
+    const savedHistory = safeStorageGet(STORAGE_KEYS.history);
+    if (savedHistory) {
+      try {
+        const parsed = JSON.parse(savedHistory);
+        if (Array.isArray(parsed)) {
+          commandHistory = parsed.filter((entry) => typeof entry === 'string').slice(0, MAX_PERSISTED_HISTORY);
+        }
+      } catch (_) {}
+    }
+
+    const savedPath = safeStorageGet(STORAGE_KEYS.currentPath);
+    if (savedPath && fileSystem[savedPath] && typeof fileSystem[savedPath] === 'object') {
+      terminalState.currentPath = savedPath;
+    }
+
+    const savedDraft = safeStorageGet(STORAGE_KEYS.draft);
+    if (typeof savedDraft === 'string' && savedDraft.length > 0) {
+      initialInputDraft = savedDraft;
+      shouldApplyDraftOnNextInput = true;
+    }
+}
+
+function resetCompletionSession() {
+    completionSession = {
+      type: null,
+      entries: [],
+      index: -1,
+      originalValue: '',
+      lastAppliedValue: ''
+    };
+}
 
 function initializePageOnLoad() {
-    const savedTheme = localStorage.getItem('terminalTheme');
+    const savedTheme = safeStorageGet('terminalTheme');
     applyTheme(savedTheme && themes[savedTheme] ? savedTheme : 'dracula');
+    hydrateSessionState();
 
     terminalElement.style.display = 'none';
     terminalElement.classList.remove('powering-on', 'shutting-down');
@@ -217,12 +320,12 @@ function triggerFullPowerOn() {
 }
 
 function createPromptHtml() {
-    return `<span class="prompt"><span class="prompt-user">${username}@${hostname}</span>:<span class="prompt-path">${currentPath}</span><span class="prompt-symbol">$</span></span>`;
+    return `<span class="prompt"><span class="prompt-user">${username}@${hostname}</span>:<span class="prompt-path">${getCurrentPath()}</span><span class="prompt-symbol">$</span></span>`;
 }
 
 export function updateTerminalTitle() {
     if (terminalTitleElement) {
-      terminalTitleElement.textContent = `${username}@${hostname}: ${currentPath} (web-shell)`;
+      terminalTitleElement.textContent = `${username}@${hostname}: ${getCurrentPath()} (web-shell)`;
     }
 }
 
@@ -232,17 +335,143 @@ function focusInput() {
     }
 }
 
+function rankMatches(items, query, getText) {
+    const normalizedQuery = query.toLowerCase();
+    return items
+      .filter((item) => {
+        const text = getText(item).toLowerCase();
+        return normalizedQuery ? text.startsWith(normalizedQuery) : true;
+      })
+      .sort((a, b) => getText(a).localeCompare(getText(b)));
+}
+
+function buildCommandCompletionSession(currentText) {
+    if (currentText.includes(' ')) return null;
+
+    const allCommands = Object.keys(commands).map((name) => ({ name }));
+    const entries = rankMatches(allCommands, currentText, (entry) => entry.name);
+    if (entries.length === 0) return null;
+
+    return {
+      type: 'command',
+      entries,
+      index: -1,
+      originalValue: currentText,
+      lastAppliedValue: currentText,
+      apply: (entry) => `${entry.name} `
+    };
+}
+
+function buildPathCompletionSession(currentText) {
+    const [rawCommand, ...restArgs] = currentText.split(' ');
+    const commandName = rawCommand.toLowerCase();
+
+    if (!COMPLETABLE_PATH_COMMANDS.includes(commandName)) return null;
+
+    const currentArg = restArgs.length > 0 ? restArgs[restArgs.length - 1] : '';
+    if (!(currentText.endsWith(' ') || currentArg)) return null;
+
+    const pathPrefix = currentArg;
+    const fallbackBase = commandName === 'cat' ? '.' : getCurrentPath();
+    const parentPath = resolvePath(pathPrefix.substring(0, pathPrefix.lastIndexOf('/') + 1) || fallbackBase);
+    const directory = fileSystem[parentPath];
+    if (!directory) return null;
+
+    const baseName = pathPrefix.substring(pathPrefix.lastIndexOf('/') + 1);
+    const fullPathPrefix = pathPrefix.substring(0, pathPrefix.lastIndexOf('/') + 1);
+    const allEntries = Object.keys(directory).map((name) => ({
+      name,
+      isDirectory: directory[name].type === 'directory' || name.endsWith('/')
+    }));
+    const entries = rankMatches(allEntries, baseName, (entry) => entry.name);
+    if (entries.length === 0) return null;
+
+    return {
+      type: 'path',
+      entries,
+      index: -1,
+      originalValue: currentText,
+      lastAppliedValue: currentText,
+      parentPath,
+      apply: (entry) => `${rawCommand} ${fullPathPrefix}${entry.name}${entry.isDirectory ? '' : ' '}`
+    };
+}
+
+function buildCompletionSession(currentText) {
+    return buildPathCompletionSession(currentText) || buildCommandCompletionSession(currentText);
+}
+
+function renderCompletionHint(session) {
+    if (!session || session.entries.length <= 1) return;
+
+    const preview = session.entries
+      .slice(0, 8)
+      .map((entry) => {
+        if (session.type === 'path') {
+          return `<span class="${entry.isDirectory ? 'output-path' : 'output-highlight'}">${entry.name}</span>`;
+        }
+        return `<span class="output-highlight">${entry.name}</span>`;
+      })
+      .join('  ');
+
+    const title = session.type === 'path' ? `Completions in ${session.parentPath}:` : 'Command matches:';
+    appendOutput(`${title}\n${preview}`);
+    scrollToBottom();
+}
+
+function updateInlineSuggestion() {
+    if (!commandInput || !commandInlineSuggestion) return;
+
+    const rawValue = commandInput.value;
+    const lowerValue = rawValue.toLowerCase();
+
+    if (!rawValue || rawValue.includes(' ')) {
+      commandInlineSuggestion.textContent = '';
+      return;
+    }
+
+    const suggestion = Object.keys(commands).find((name) => name.startsWith(lowerValue) && name !== lowerValue);
+    if (!suggestion) {
+      commandInlineSuggestion.textContent = '';
+      return;
+    }
+
+    commandInlineSuggestion.textContent = suggestion.slice(rawValue.length);
+    commandInlineSuggestion.style.setProperty('--suggestion-offset', `${rawValue.length}ch`);
+}
+
+function handleInputChange() {
+    resetCompletionSession();
+    persistCommandDraft(commandInput.value);
+    updateInlineSuggestion();
+}
+
 function createInputLine() {
     currentInputLineDiv = document.createElement('div');
     currentInputLineDiv.className = 'terminal-line';
     currentInputLineDiv.id = 'command-input-container';
     currentInputLineDiv.innerHTML = `
               ${createPromptHtml()}
-              <input type="text" id="command-input" spellcheck="false" autocomplete="off">
+              <div class="command-input-wrapper">
+                <input type="text" id="command-input" spellcheck="false" autocomplete="off">
+                <span class="command-inline-suggestion" aria-hidden="true"></span>
+              </div>
           `;
     terminalBody.appendChild(currentInputLineDiv);
     commandInput = currentInputLineDiv.querySelector('#command-input');
+    commandInlineSuggestion = currentInputLineDiv.querySelector('.command-inline-suggestion');
     commandInput.addEventListener('keydown', handleKeydown);
+    commandInput.addEventListener('input', handleInputChange);
+
+    if (shouldApplyDraftOnNextInput && initialInputDraft) {
+      commandInput.value = initialInputDraft;
+      commandInput.setSelectionRange(commandInput.value.length, commandInput.value.length);
+      shouldApplyDraftOnNextInput = false;
+      updateInlineSuggestion();
+    } else {
+      commandInlineSuggestion.textContent = '';
+    }
+
     updateTerminalTitle();
     focusInput();
 }
@@ -269,6 +498,8 @@ function handleKeydown(event) {
           appendOutput(interruptLine.innerHTML);
         }
 
+        clearPersistedDraft();
+        resetCompletionSession();
         createInputLine();
         scrollToBottom();
       }
@@ -280,7 +511,10 @@ function handleKeydown(event) {
       const commandStr = commandInput.value.trim();
 
       commandInput.removeEventListener('keydown', handleKeydown);
+      commandInput.removeEventListener('input', handleInputChange);
       commandInput.disabled = true;
+      clearPersistedDraft();
+      resetCompletionSession();
 
       const commandEchoLine = document.createElement('div');
       commandEchoLine.className = 'terminal-line';
@@ -290,6 +524,7 @@ function handleKeydown(event) {
       if (commandStr) {
         if (commandHistory.length === 0 || commandHistory[0] !== commandStr) {
           commandHistory.unshift(commandStr);
+          persistCommandHistory();
         }
         historyIndex = -1;
         processCommand(commandStr);
@@ -306,6 +541,9 @@ function handleKeydown(event) {
         historyIndex++;
         commandInput.value = commandHistory[historyIndex];
         commandInput.setSelectionRange(commandInput.value.length, commandInput.value.length);
+        persistCommandDraft(commandInput.value);
+        updateInlineSuggestion();
+        resetCompletionSession();
       }
     } else if (event.key === 'ArrowDown') {
       event.preventDefault();
@@ -313,57 +551,45 @@ function handleKeydown(event) {
         historyIndex--;
         commandInput.value = commandHistory[historyIndex];
         commandInput.setSelectionRange(commandInput.value.length, commandInput.value.length);
+        persistCommandDraft(commandInput.value);
       } else if (historyIndex <= 0) {
         historyIndex = -1;
         commandInput.value = '';
+        persistCommandDraft('');
       }
+      updateInlineSuggestion();
+      resetCompletionSession();
     } else if (event.key === 'Tab') {
       event.preventDefault();
       const currentText = commandInput.value;
-      const [cmdPart, ...restArgs] = currentText.split(' ');
-      const currentArg = restArgs.length > 0 ? restArgs[restArgs.length - 1] : '';
+      const canCycleExisting = completionSession.entries.length > 0 && currentText === completionSession.lastAppliedValue;
 
-      if (restArgs.length === 0 && !currentText.includes(' ')) {
-        const possibleCompletions = Object.keys(commands).filter((cmd) => cmd.startsWith(cmdPart.toLowerCase()));
-        if (possibleCompletions.length === 1) {
-          commandInput.value = possibleCompletions[0] + ' ';
-          commandInput.setSelectionRange(commandInput.value.length, commandInput.value.length);
-        } else if (possibleCompletions.length > 1) {
-          appendOutput('Possible commands: \n' + possibleCompletions.map((c) => `<span class="output-highlight">${c}</span>`).join('  '));
-          scrollToBottom();
-        }
-      } else if (['cd', 'ls', 'cat'].includes(cmdPart.toLowerCase()) && (currentText.endsWith(' ') || currentArg)) {
-        const pathPrefix = currentArg;
-        const parentPath = resolvePath(
-          pathPrefix.substring(0, pathPrefix.lastIndexOf('/') + 1) || (cmdPart.toLowerCase() === 'cd' || cmdPart.toLowerCase() === 'ls' ? currentPath : '.')
-        );
-        const baseName = pathPrefix.substring(pathPrefix.lastIndexOf('/') + 1);
-        const dirToList = fileSystem[parentPath];
-
-        if (dirToList) {
-          const possibleFiles = Object.keys(dirToList).filter((item) => item.startsWith(baseName));
-          if (possibleFiles.length === 1) {
-            const completion = possibleFiles[0];
-            const fullPathPrefix = pathPrefix.substring(0, pathPrefix.lastIndexOf('/') + 1);
-            commandInput.value = `${cmdPart} ${fullPathPrefix}${completion}${dirToList[completion].type === 'directory' ? '' : ' '}`;
-            commandInput.setSelectionRange(commandInput.value.length, commandInput.value.length);
-          } else if (possibleFiles.length > 1) {
-            appendOutput(
-              `Possible completions in ${parentPath}:\n` +
-                possibleFiles.map((f) => `<span class="${dirToList[f].type === 'directory' ? 'output-path' : 'output-highlight'}">${f}</span>`).join('  ')
-            );
-            scrollToBottom();
-          }
-        }
+      if (!canCycleExisting) {
+        const newSession = buildCompletionSession(currentText);
+        if (!newSession) return;
+        completionSession = newSession;
+        renderCompletionHint(completionSession);
       }
+
+      completionSession.index = (completionSession.index + 1) % completionSession.entries.length;
+      const nextEntry = completionSession.entries[completionSession.index];
+      commandInput.value = completionSession.apply(nextEntry);
+      completionSession.lastAppliedValue = commandInput.value;
+      commandInput.setSelectionRange(commandInput.value.length, commandInput.value.length);
+      persistCommandDraft(commandInput.value);
+      updateInlineSuggestion();
     }
 }
 
 function initializeTerminalContent() {
     terminalBody.innerHTML = '';
-    commandHistory = [];
     historyIndex = -1;
-    currentPath = '~';
+    if (!fileSystem[getCurrentPath()] || typeof fileSystem[getCurrentPath()] !== 'object') {
+      setCurrentPath('~');
+    } else {
+      updateTerminalTitle();
+    }
+    resetCompletionSession();
 
     commands.banner();
     createInputLine();

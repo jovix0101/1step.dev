@@ -1,7 +1,7 @@
 
 
 import { appendOutput, escapeHtml, applyTheme } from './ui.js';
-import { getUsername, getHostname, getCurrentPath, updateTerminalTitle, getCommandHistory, setCommandHistory, getHistoryIndex, setHistoryIndex, powerOff } from './main.js';
+import { getUsername, getHostname, getCurrentPath, setCurrentPath, getCommandHistory, powerOff } from './main.js';
 
 export const fileSystem = {
   '~': {
@@ -100,16 +100,14 @@ Type '<span class="output-highlight">help</span>' to see available commands.
   },
   cd: (args) => {
     if (args.length === 0 || args[0] === '~' || args[0] === '') {
-      currentPath = '~';
-      updateTerminalTitle();
+      setCurrentPath('~');
       return ``;
     }
     const targetDirArg = args[0];
     let newPathCandidate = resolvePath(targetDirArg);
 
     if (fileSystem[newPathCandidate] && typeof fileSystem[newPathCandidate] === 'object') {
-      currentPath = newPathCandidate;
-      updateTerminalTitle();
+      setCurrentPath(newPathCandidate);
       return ``;
     }
     return `cd: no such file or directory: ${targetDirArg}`;
@@ -279,7 +277,7 @@ export function resolvePath(targetPath) {
     if (!targetPath || targetPath === '~' || targetPath === '/') return '~';
 
     let newParts;
-    const currentPath = getCurrentPath();
+    const cwd = getCurrentPath();
 
     if (targetPath.startsWith('~/')) {
       newParts = targetPath
@@ -292,7 +290,7 @@ export function resolvePath(targetPath) {
         .split('/')
         .filter((p) => p && p !== '.');
     } else {
-      newParts = (currentPath === '~' ? [] : currentPath.substring(2).split('/')).concat(targetPath.split('/'));
+      newParts = (cwd === '~' ? [] : cwd.substring(2).split('/')).concat(targetPath.split('/'));
     }
 
     const resolvedParts = [];
@@ -307,4 +305,3 @@ export function resolvePath(targetPath) {
     }
     return resolvedParts.length === 0 ? '~' : '~/' + resolvedParts.join('/');
   }
-

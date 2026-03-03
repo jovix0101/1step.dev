@@ -343,10 +343,30 @@ body::before {
 #command-input-container {
   display: flex;
   width: 100%;
+  align-items: center;
+}
+
+.command-input-wrapper {
+  position: relative;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.command-inline-suggestion {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  white-space: pre;
+  color: rgba(220, 228, 247, 0.4);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  transform: translateX(var(--suggestion-offset, 0ch));
+  z-index: 0;
 }
 
 #command-input {
-  flex-grow: 1;
+  width: 100%;
   padding: 0;
   border: none;
   outline: none;
@@ -355,6 +375,8 @@ body::before {
   font-family: var(--font-family);
   font-size: var(--font-size);
   animation: caret-blink 1.2s step-end infinite;
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes caret-blink {
