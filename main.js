@@ -19,6 +19,7 @@ let isTransitioningState = false;
 let isInteractionHeld = false;
 let powerOnTimeoutId = null;
 let thresholdMetForPowerOn = false;
+let lightStripCircumference = 0;
 
 const username = 'jovix';
 const hostname = '1step.dev';
@@ -58,7 +59,7 @@ function initializePageOnLoad() {
 
 function resetLightStrip() {
     const lightStripRadius = parseFloat(lightStripCircle.getAttribute('r'));
-    const lightStripCircumference = 2 * Math.PI * lightStripRadius;
+    lightStripCircumference = 2 * Math.PI * lightStripRadius;
     lightStripCircle.classList.remove('retracting', 'threshold-met', 'active');
     lightStripCircle.style.transition = 'none';
     lightStripCircle.style.stroke = 'var(--power-light-strip-color)';

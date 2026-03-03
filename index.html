@@ -3,39 +3,85 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Jovix - An interactive terminal-style personal website.">
-    <meta name="keywords" content="Jovix, portfolio, terminal, developer, software engineer">
-    <title>Jovix - 1step.dev Terminal</title>
-    <link rel="icon" href="avatar.png" type="image/png">
+    <meta
+      name="description"
+      content="Jovix terminal portfolio with a cinematic boot flow and interactive web shell."
+    />
+    <meta name="keywords" content="Jovix, portfolio, terminal, developer, software engineer" />
+    <title>Jovix // Terminal Console</title>
+    <link rel="icon" href="avatar.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body style="background-color: #282a36">
-    <div id="terminal" style="display: none">
-      <div id="terminal-header">
-        <span class="dot red"></span>
-        <span class="dot yellow"></span>
-        <span class="dot green"></span>
-        <span class="title"></span>
-      </div>
-      <div id="terminal-body" onclick="focusInput()"></div>
-    </div>
+  <body>
+    <div class="ambient-noise" aria-hidden="true"></div>
 
-    <div id="power-button-area">
-      <button id="power-on-btn" aria-label="Power On">
-        <svg id="power-button-light-strip-svg" viewBox="0 0 72 72">
-          <circle id="power-button-light-strip-circle" cx="36" cy="36" r="33.75" />
-        </svg>
-        <svg id="power-button-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-          <path
-            d="M12.0001 2.00004C13.1009 2.00004 14.043 2.89938 14.1098 3.99396L14.1112 4.22738V10.7727C14.1112 11.8778 13.212 12.7727 12.107 12.7727C11.0018 12.7727 10.1068 11.8829 10.1025 10.7871L10.1024 10.7727V4.22738C10.1024 3.12231 10.9975 2.22738 12.1026 2.22738L12.0001 2.00004ZM12.0001 0.0000446963C6.47726 0.0000446963 2.00012 4.47718 2.00012 10C2.00012 15.5229 6.47726 20 12.0001 20C17.523 20 22.0001 15.5229 22.0001 10C22.0001 4.47718 17.523 0.0000446963 12.0001 0.0000446963ZM12.0001 18C7.58185 18 4.00012 14.4183 4.00012 10C4.00012 5.58176 7.58185 2.00004 12.0001 2.00004C16.4184 2.00004 20.0001 5.58176 20.0001 10C20.0001 14.4183 16.4184 18 12.0001 18Z"
-          />
-        </svg>
-      </button>
-      <div id="power-on-prompt">Hold to Power On</div>
-    </div>
+    <main class="site-shell">
+      <section class="intro-panel" aria-label="Site introduction">
+        <p class="eyebrow">JOVIX // DIGITAL WORKBENCH</p>
+        <h1>Terminal-first portfolio experience.</h1>
+        <p class="intro-copy">
+          This website boots like a machine. Hold the power button to spin up the shell, then navigate with commands
+          like <code>help</code>, <code>projects</code>, <code>skills</code> and <code>theme matrix</code>.
+        </p>
+        <div class="intro-tags" aria-label="Highlights">
+          <span>Vanilla JS</span>
+          <span>CLI UX</span>
+          <span>Custom Themes</span>
+        </div>
+      </section>
+
+      <section class="terminal-stage" aria-label="Interactive terminal">
+        <div id="terminal" style="display: none">
+          <div id="terminal-header">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="title"></span>
+          </div>
+          <div id="terminal-body"></div>
+        </div>
+
+        <div id="power-button-area">
+          <button id="power-on-btn" aria-label="Power On">
+            <svg id="power-button-light-strip-svg" viewBox="0 0 72 72">
+              <circle id="power-button-light-strip-circle" cx="36" cy="36" r="33.75" />
+            </svg>
+            <svg
+              id="power-button-icon-svg"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M12.0001 2.00004C13.1009 2.00004 14.043 2.89938 14.1098 3.99396L14.1112 4.22738V10.7727C14.1112 11.8778 13.212 12.7727 12.107 12.7727C11.0018 12.7727 10.1068 11.8829 10.1025 10.7871L10.1024 10.7727V4.22738C10.1024 3.12231 10.9975 2.22738 12.1026 2.22738L12.0001 2.00004ZM12.0001 0.0000446963C6.47726 0.0000446963 2.00012 4.47718 2.00012 10C2.00012 15.5229 6.47726 20 12.0001 20C17.523 20 22.0001 15.5229 22.0001 10C22.0001 4.47718 17.523 0.0000446963 12.0001 0.0000446963ZM12.0001 18C7.58185 18 4.00012 14.4183 4.00012 10C4.00012 5.58176 7.58185 2.00004 12.0001 2.00004C16.4184 2.00004 20.0001 5.58176 20.0001 10C20.0001 14.4183 16.4184 18 12.0001 18Z"
+              />
+            </svg>
+          </button>
+          <div id="power-on-prompt">Hold to Power On</div>
+        </div>
+      </section>
+
+      <aside class="status-panel" aria-label="Quick command hints">
+        <p class="status-title">Quick Start</p>
+        <p class="status-copy">After boot, run these:</p>
+        <div class="status-list">
+          <div><code>help</code> list commands</div>
+          <div><code>whoami</code> basic profile</div>
+          <div><code>projects</code> featured work</div>
+          <div><code>theme gruvbox</code> switch look</div>
+        </div>
+      </aside>
+    </main>
 
     <footer id="developer-info">
-      Developed by Jovix with assistance from Google Gemini. | <a href="https://1step.dev" target="_blank" class="footer-link">My Blog</a>
+      Developed by Jovix with assistance from Google Gemini. |
+      <a href="https://1step.dev" target="_blank" class="footer-link">My Blog</a>
     </footer>
 
     <script type="module" src="main.js"></script>
