@@ -245,7 +245,7 @@ async function handleTerminalSelectionCopy(event) {
       try {
         await navigator.clipboard.writeText(selectedText);
         const tempMsg = document.createElement('div');
-        tempMsg.textContent = 'Copied!';
+        tempMsg.textContent = '已复制';
         tempMsg.style.position = 'fixed';
         tempMsg.style.bottom = '20px';
         tempMsg.style.left = '50%';
@@ -284,7 +284,7 @@ async function handleTerminalPaste(event) {
       }
     } catch (err) {
       console.error('Failed to read clipboard contents: ', err);
-      appendOutput('Clipboard paste failed. Browser permission might be needed or clipboard is empty.', 'output-error');
+      appendOutput('粘贴失败：可能未授予剪贴板权限，或剪贴板为空。', 'output-error');
     }
 }
 
@@ -325,7 +325,7 @@ function createPromptHtml() {
 
 export function updateTerminalTitle() {
     if (terminalTitleElement) {
-      terminalTitleElement.textContent = `${username}@${hostname}: ${getCurrentPath()} (web-shell)`;
+      terminalTitleElement.textContent = `${username}@${hostname}: ${getCurrentPath()}（网页终端）`;
     }
 }
 
@@ -414,7 +414,7 @@ function renderCompletionHint(session) {
       })
       .join('  ');
 
-    const title = session.type === 'path' ? `Completions in ${session.parentPath}:` : 'Command matches:';
+    const title = session.type === 'path' ? `目录 ${session.parentPath} 的补全候选：` : '命令补全候选：';
     appendOutput(`${title}\n${preview}`);
     scrollToBottom();
 }
@@ -610,11 +610,11 @@ function processCommand(commandStr) {
         }
       } catch (error) {
         console.error('Error executing command:', commandName, args, error);
-        appendOutput(`Error executing command ${escapeHtml(commandName)}: ${escapeHtml(error.message)}`, 'output-error');
+        appendOutput(`执行命令 ${escapeHtml(commandName)} 时出错: ${escapeHtml(error.message)}`, 'output-error');
       }
     } else {
-      appendOutput(`command not found: ${escapeHtml(commandName)}`, 'output-error');
-      appendOutput(`Type '<span class="output-highlight">help</span>' for a list of available commands.`);
+      appendOutput(`找不到命令: ${escapeHtml(commandName)}`, 'output-error');
+      appendOutput(`输入 '<span class="output-highlight">help</span>' 查看可用命令列表。`);
     }
 }
 
@@ -631,7 +631,7 @@ export function powerOff(isRebooting = false) {
     developerInfoFooter.style.opacity = '0.7';
 
     if (commandInput) commandInput.disabled = true;
-    appendOutput(`System ${isRebooting ? 'rebooting' : 'shutting down'}...`, 'output-highlight');
+    appendOutput(`系统正在${isRebooting ? '重启' : '关机'}...`, 'output-highlight');
     scrollToBottom();
 
     terminalElement.classList.remove('powering-on');

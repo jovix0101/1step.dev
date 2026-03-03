@@ -92,11 +92,11 @@ export function applyTheme(themeName) {
         document.body.style.backgroundColor = theme['--background-color'];
       }
       localStorage.setItem('terminalTheme', themeName);
-      return `Theme set to <span class="output-highlight">${themeName}</span>.`;
+      return `主题已切换为 <span class="output-highlight">${themeName}</span>。`;
     }
-    return `Theme '${themeName}' not found. Available: ${Object.keys(themes)
+    return `未找到主题 '${themeName}'。可用主题：${Object.keys(themes)
       .map((t) => `<span class="output-highlight">${t}</span>`)
-      .join(', ')}.`;
+      .join(', ')}。`;
 }
 
 export function escapeHtml(unsafe) {

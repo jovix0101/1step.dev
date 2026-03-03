@@ -578,6 +578,211 @@ body {
   text-decoration: underline;
 }
 
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.module {
+  border-radius: 16px;
+  border: 1px solid rgba(145, 195, 245, 0.24);
+  background: linear-gradient(170deg, rgba(12, 22, 36, 0.86), rgba(9, 17, 28, 0.7));
+  padding: 18px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.module-kicker {
+  margin: 0;
+  color: #93ccff;
+  letter-spacing: 0.11em;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.module-title {
+  margin: 8px 0 0;
+  font-family: var(--display-font);
+  font-size: clamp(1.05rem, 1.8vw, 1.46rem);
+  line-height: 1.12;
+}
+
+.about-module {
+  grid-column: span 12;
+}
+
+.about-layout {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 14px;
+}
+
+.about-copy p {
+  margin: 0 0 10px;
+  color: rgba(221, 235, 255, 0.84);
+}
+
+.about-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.metric-card {
+  border-radius: 10px;
+  border: 1px solid rgba(153, 203, 255, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 10px;
+  display: grid;
+  gap: 4px;
+}
+
+.metric-value {
+  font-family: var(--display-font);
+  font-size: 1.2rem;
+  color: #d7efff;
+}
+
+.metric-label {
+  font-size: 0.76rem;
+  color: rgba(210, 226, 244, 0.78);
+}
+
+.projects-module {
+  grid-column: span 8;
+}
+
+.module-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.module-link {
+  color: #9ed8ff;
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+
+.module-link:hover {
+  text-decoration: underline;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.project-card {
+  border-radius: 10px;
+  border: 1px solid rgba(153, 203, 255, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 11px;
+}
+
+.project-name {
+  margin: 0;
+  font-family: var(--display-font);
+  font-size: 0.98rem;
+}
+
+.project-desc {
+  margin: 8px 0;
+  color: rgba(221, 235, 255, 0.82);
+  font-size: 0.86rem;
+}
+
+.project-stack {
+  margin: 0;
+  color: #8fd2ff;
+  font-size: 0.78rem;
+}
+
+.timeline-module {
+  grid-column: span 4;
+}
+
+.timeline-list {
+  margin-top: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.timeline-item {
+  border-left: 2px solid rgba(148, 204, 255, 0.42);
+  padding: 0 0 0 10px;
+}
+
+.timeline-year {
+  color: #a8dbff;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+.timeline-item p {
+  margin: 6px 0 0;
+  color: rgba(221, 235, 255, 0.82);
+  font-size: 0.86rem;
+}
+
+.now-module {
+  grid-column: span 7;
+}
+
+.now-list {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: rgba(221, 235, 255, 0.85);
+  display: grid;
+  gap: 8px;
+}
+
+.contact-module {
+  grid-column: span 5;
+}
+
+.contact-copy {
+  margin: 12px 0;
+  color: rgba(221, 235, 255, 0.84);
+}
+
+.contact-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.cta-primary,
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.83rem;
+  padding: 8px 12px;
+}
+
+.cta-primary {
+  background: linear-gradient(180deg, #d4ecff, #90c9ef);
+  color: #0b2b40;
+  font-weight: 700;
+}
+
+.cta-secondary {
+  border: 1px solid rgba(153, 203, 255, 0.42);
+  color: #bfe3ff;
+}
+
+.cta-primary:hover,
+.cta-secondary:hover {
+  filter: brightness(1.08);
+}
+
 @media (max-width: 1040px) {
   .top-bar,
   .main-bay {
@@ -590,6 +795,17 @@ body {
 
   .dock-panel {
     order: 2;
+  }
+
+  .projects-module,
+  .timeline-module,
+  .now-module,
+  .contact-module {
+    grid-column: span 12;
+  }
+
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -615,6 +831,17 @@ body {
 
   #terminal-body {
     padding: 11px;
+  }
+
+  .about-layout,
+  .about-metrics,
+  .project-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .module {
+    padding: 14px;
+    border-radius: 12px;
   }
 }
 
