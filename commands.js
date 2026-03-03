@@ -240,7 +240,7 @@ export const commands = {
 <span class="output-highlight">工程概念:</span>     REST APIs, 微服务, CI/CD, 敏捷开发, Web 性能优化
 `,
   contact: () => `
-<span class="output-highlight">邮箱:</span>         <a href="mailto:jovix@example.com" class="output-link">jovix@example.com</a>（请替换为你的真实邮箱）
+<span class="output-highlight">邮箱:</span>         <a href="mailto:jovix0101@gmail.com" class="output-link">jovix0101@gmail.com</a>（请替换为你的真实邮箱）
 <span class="output-highlight">LinkedIn:</span>     输入 '<span class="output-highlight">socials</span>' 查看我的 LinkedIn。
 欢迎联系，我一直愿意交流新想法与合作机会。
 `,
