@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Jovix - 专注于精致产品与优雅代码的软件工程师" />
+    <meta name="keywords" content="Jovix, 软件工程师, 前端开发, 产品设计, 简洁设计" />
+    <title>Jovix - 软件工程师</title>
+    <link rel="icon" href="avatar.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="minimal.css" />
+  </head>
+  <body>
+    <div class="grain-overlay" aria-hidden="true"></div>
+
+    <!-- Floating Navigation -->
+    <nav class="floating-nav">
+      <a href="#intro" class="nav-dot active" aria-label="介绍"></a>
+      <a href="#about" class="nav-dot" aria-label="关于"></a>
+      <a href="#work" class="nav-dot" aria-label="作品"></a>
+      <a href="#contact" class="nav-dot" aria-label="联系"></a>
+    </nav>
+
+    <main class="site-main">
+      <!-- Intro Section -->
+      <section class="intro-section" id="intro">
+        <div class="intro-container">
+          <div class="intro-sidebar">
+            <div class="profile-card">
+              <div class="avatar-container">
+                <img src="avatar.png" alt="Jovix" class="avatar-image" />
+                <div class="status-indicator"></div>
+              </div>
+              <h1 class="profile-name">Jovix</h1>
+              <p class="profile-title">软件工程师</p>
+              <p class="profile-location">📍 中国</p>
+            </div>
+
+            <div class="quick-links">
+              <a href="mailto:jovix0101@gmail.com" class="quick-link">
+                <span class="link-icon">✉️</span>
+                <span>邮件</span>
+              </a>
+              <a href="https://github.com/jovix0101" target="_blank" class="quick-link">
+                <span class="link-icon">🔗</span>
+                <span>GitHub</span>
+              </a>
+              <a href="https://1step.dev" target="_blank" class="quick-link">
+                <span class="link-icon">📝</span>
+                <span>博客</span>
+              </a>
+              <a href="index.html" class="quick-link">
+                <span class="link-icon">💻</span>
+                <span>终端版</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="intro-content">
+            <div class="greeting">
+              <h2 class="greeting-text">
+                你好，我是 Jovix 👋
+              </h2>
+              <p class="greeting-subtitle">
+                一个热爱创造的软件工程师
+              </p>
+            </div>
+
+            <div class="intro-story">
+              <p class="story-paragraph">
+                我相信好的软件应该像一首优美的诗 ——
+                <strong>简洁而有力，优雅而实用</strong>。
+              </p>
+              <p class="story-paragraph">
+                过去六年里，我专注于构建让人愉悦的数字产品，
+                从前端界面到后端架构，从用户体验到性能优化。
+              </p>
+            </div>
+
+            <div class="current-status">
+              <div class="status-item">
+                <span class="status-label">目前专注</span>
+                <span class="status-value">前端架构 & 工程实践</span>
+              </div>
+              <div class="status-item">
+                <span class="status-label">工作状态</span>
+                <span class="status-value">开放合作机会</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section class="about-section" id="about">
+        <div class="section-container">
+          <div class="section-header">
+            <h3 class="section-title">关于我</h3>
+            <p class="section-subtitle">技术与创造的平衡</p>
+          </div>
+
+          <div class="about-content">
+            <div class="about-text">
+              <p class="about-paragraph">
+                六年的开发经验让我深刻理解，优秀的软件不仅仅是功能的堆砌，
+                更是用户需求、技术实现与美学设计的完美平衡。
+              </p>
+              <p class="about-paragraph">
+                我相信简洁的代码能够创造复杂的价值，精心设计的界面能够
+                让技术真正服务于人。
+              </p>
+            </div>
+
+            <div class="skills-showcase">
+              <div class="skill-category">
+                <h4 class="category-title">技术栈</h4>
+                <div class="skill-tags">
+                  <span class="skill-tag">JavaScript</span>
+                  <span class="skill-tag">TypeScript</span>
+                  <span class="skill-tag">React</span>
+                  <span class="skill-tag">Vue</span>
+                  <span class="skill-tag">Node.js</span>
+                  <span class="skill-tag">Python</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Work Section -->
+      <section class="work-section" id="work">
+        <div class="section-container">
+          <div class="section-header">
+            <h3 class="section-title">精选作品</h3>
+            <p class="section-subtitle">一些我引以为豪的项目</p>
+          </div>
+
+          <div class="projects-grid">
+            <article class="project-item featured">
+              <div class="project-image">
+                <div class="image-placeholder">
+                  <span class="placeholder-text">🖥️</span>
+                </div>
+              </div>
+              <div class="project-details">
+                <h4 class="project-name">终端风格作品集</h4>
+                <p class="project-description">
+                  一个致敬经典终端的交互式网站，融合了复古美学与现代技术。
+                  支持真实的命令行操作，包含主题切换、文件系统模拟等功能。
+                </p>
+                <div class="project-tech">
+                  <span class="tech-badge">JavaScript</span>
+                  <span class="tech-badge">CSS</span>
+                  <span class="tech-badge">Web APIs</span>
+                </div>
+                <div class="project-links">
+                  <a href="index.html" class="project-link">查看项目</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <div class="project-image">
+                <div class="image-placeholder small">
+                  <span class="placeholder-text">📊</span>
+                </div>
+              </div>
+              <div class="project-details">
+                <h4 class="project-name">实时监控面板</h4>
+                <p class="project-description">
+                  为分布式系统设计的监控仪表盘，
+                  实时展示系统状态和性能指标。
+                </p>
+                <div class="project-tech">
+                  <span class="tech-badge">React</span>
+                  <span class="tech-badge">WebSocket</span>
+                  <span class="tech-badge">D3.js</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <div class="project-image">
+                <div class="image-placeholder small">
+                  <span class="placeholder-text">🤖</span>
+                </div>
+              </div>
+              <div class="project-details">
+                <h4 class="project-name">AI 内容工具</h4>
+                <p class="project-description">
+                  基于 GPT 的内容创作助手，
+                  帮助提升写作效率和内容质量。
+                </p>
+                <div class="project-tech">
+                  <span class="tech-badge">Python</span>
+                  <span class="tech-badge">FastAPI</span>
+                  <span class="tech-badge">OpenAI</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="more-projects">
+            <p class="more-text">更多项目正在路上...</p>
+            <a href="https://1step.dev" target="_blank" class="more-link">
+              访问我的博客了解更多 →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact-section" id="contact">
+        <div class="section-container">
+          <div class="contact-content">
+            <div class="contact-text">
+              <h3 class="contact-title">让我们聊聊</h3>
+              <p class="contact-description">
+                如果你有有趣的项目想法，或者只是想交个朋友，
+                我都很乐意与你交流。
+              </p>
+            </div>
+
+            <div class="contact-methods">
+              <a href="mailto:jovix0101@gmail.com" class="contact-method primary">
+                <div class="method-icon">✉️</div>
+                <div class="method-info">
+                  <span class="method-title">发邮件给我</span>
+                  <span class="method-subtitle">jovix0101@gmail.com</span>
+                </div>
+              </a>
+
+              <a href="https://github.com/jovix0101" target="_blank" class="contact-method">
+                <div class="method-icon">🔗</div>
+                <div class="method-info">
+                  <span class="method-title">GitHub</span>
+                  <span class="method-subtitle">查看我的代码</span>
+                </div>
+              </a>
+
+              <a href="https://1step.dev" target="_blank" class="contact-method">
+                <div class="method-icon">📝</div>
+                <div class="method-info">
+                  <span class="method-title">我的博客</span>
+                  <span class="method-subtitle">技术文章和思考</span>
+                </div>
+              </a>
+            </div>
+
+            <div class="contact-note">
+              <p>通常我会在 24 小时内回复邮件 📮</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <p class="footer-text">
+          © 2026 Jovix. 用心设计，精心编码。
+        </p>
+      </div>
+    </footer>
+
+    <script src="minimal.js"></script>
+  </body>
+</html>
