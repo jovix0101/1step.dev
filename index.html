@@ -1,177 +1,489 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Jovix 终端风格个人网站 V2：沉浸式控制室布局与交互式网页终端体验。" />
-    <meta name="keywords" content="Jovix, 个人网站, 终端, 开发者, 软件工程师, 前端架构" />
-    <title>Jovix // 终端控制台 V2</title>
-    <link rel="icon" href="avatar.png" type="image/png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Bricolage+Grotesque:wght@500;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style-v2.css" />
-  </head>
-  <body>
-    <div class="bg-grid" aria-hidden="true"></div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jovix — Creative Developer</title>
+  <meta name="description" content="Jovix — Full-stack developer, creative technologist. Interactive terminal portfolio at 1step.dev">
 
-    <main class="control-room">
-      <header class="top-bar" aria-label="页面总览">
-        <div>
-          <p class="chip">1STEP.DEV / V2</p>
-          <h1>终端控制台视图</h1>
-        </div>
-        <p class="top-copy">
-          按住电源键开机后，可运行 <code>help</code>、<code>projects</code>、<code>theme matrix</code> 和
-          <code>history</code> 等命令探索更多功能。
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="awwwards.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='80' height='80' x='10' y='10' rx='12' fill='%2300f0ff'/><text x='50' y='65' font-size='40' font-family='monospace' text-anchor='middle' fill='%23050508'>J</text></svg>">
+</head>
+<body>
+
+  <!-- Decorative overlays -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- Particle background -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-icon"><i data-lucide="terminal"></i></span>
+      <span>1step.dev</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#terminal-section">Terminal</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="index-zh.html" class="lang-switch" title="中文">CN</a></li>
+    </ul>
+  </nav>
+
+  <!-- ==========================================
+       Power Button / Boot Screen
+       ========================================== -->
+  <div id="power-button-area" class="power-button-area" style="display:none;">
+    <span class="power-title">1step.dev</span>
+    <button id="power-on-btn" class="power-on-btn" aria-label="Hold to power on">
+      <svg class="power-light-strip" viewBox="0 0 120 120">
+        <circle id="power-button-light-strip-circle" class="power-light-strip-circle"
+                cx="60" cy="60" r="56"
+                stroke-dasharray="351.86" stroke-dashoffset="351.86" />
+      </svg>
+      <i data-lucide="power"></i>
+    </button>
+    <span class="power-hint">
+      <i data-lucide="mouse-pointer-click"></i>
+      hold to boot
+    </span>
+  </div>
+
+  <!-- ==========================================
+       Hero Section
+       ========================================== -->
+  <section id="hero" class="section hero">
+    <div class="hero-eyebrow reveal">
+      <i data-lucide="sparkles"></i>
+      <span>creative developer</span>
+    </div>
+
+    <h1 class="hero-name">JOVIX</h1>
+
+    <p class="hero-role reveal">
+      <span class="hero-role-text"></span>
+      <span class="typed-cursor"></span>
+    </p>
+
+    <div class="hero-cta reveal">
+      <a href="#terminal-section" class="btn btn-primary">
+        <i data-lucide="terminal"></i>
+        Open Terminal
+      </a>
+      <a href="#projects" class="btn btn-ghost">
+        <i data-lucide="folder-open"></i>
+        View Projects
+      </a>
+    </div>
+
+    <div class="scroll-indicator">
+      <i data-lucide="chevron-down"></i>
+      <span class="scroll-indicator-text">scroll</span>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ==========================================
+       About Section
+       ========================================== -->
+  <section id="about" class="section">
+    <div class="section-label reveal">
+      <i data-lucide="user"></i>
+      <span>about</span>
+    </div>
+    <h2 class="section-title reveal">
+      Building at the intersection of<br>
+      <span class="gradient-text">code and creativity</span>
+    </h2>
+
+    <div class="about-grid">
+      <div class="about-text reveal-left">
+        <p>
+          A developer who believes that <strong>great software is crafted, not just written</strong>.
+          Passionate about creating digital experiences that push boundaries — where
+          clean architecture meets expressive design.
         </p>
-      </header>
+        <p style="margin-top: 16px;">
+          Focused on full-stack development, interactive interfaces, and open-source tools.
+          Every project is an opportunity to explore what's possible when technology serves imagination.
+        </p>
+        <blockquote class="about-quote">
+          "The best way to predict the future is to invent it."
+          <cite>— Alan Kay</cite>
+        </blockquote>
+      </div>
 
-      <section class="main-bay" aria-label="终端区域">
-        <aside class="dock-panel" aria-label="命令提示面板">
-          <p class="dock-title">命令面板</p>
-          <ul>
-            <li><code>whoami</code> 查看个人概况</li>
-            <li><code>skills</code> 查看技术栈</li>
-            <li><code>socials</code> 查看外部链接</li>
-            <li><code>theme solarized</code> 切换浅色主题</li>
-          </ul>
-        </aside>
+      <div class="profile-card reveal-right">
+        <div class="profile-avatar">
+          <img src="avatar.png" alt="Jovix avatar" loading="lazy">
+        </div>
+        <div class="profile-name">Jovix</div>
+        <div class="profile-handle">@jovix0101</div>
+        <div class="info-list">
+          <div class="info-item">
+            <i data-lucide="map-pin"></i>
+            <span>Digital Nomad</span>
+          </div>
+          <div class="info-item">
+            <i data-lucide="briefcase"></i>
+            <span>Full-Stack Developer</span>
+          </div>
+          <div class="info-item">
+            <i data-lucide="code-2"></i>
+            <span>TypeScript / Python / Rust</span>
+          </div>
+          <div class="info-item">
+            <i data-lucide="heart"></i>
+            <span>Open Source Enthusiast</span>
+          </div>
+          <div class="info-item">
+            <i data-lucide="coffee"></i>
+            <span>Fueled by curiosity</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <section class="terminal-frame" aria-label="交互终端">
-          <div id="terminal" style="display: none">
-            <div id="terminal-header">
-              <span class="dot red"></span>
-              <span class="dot yellow"></span>
-              <span class="dot green"></span>
-              <span class="title"></span>
+  <div class="section-divider"></div>
+
+  <!-- ==========================================
+       Skills Section
+       ========================================== -->
+  <section id="skills" class="section">
+    <div class="section-label reveal">
+      <i data-lucide="layers"></i>
+      <span>skills</span>
+    </div>
+    <h2 class="section-title reveal">
+      The <span class="gradient-text">tech arsenal</span>
+    </h2>
+    <p class="section-subtitle reveal">
+      Technologies and tools I work with to bring ideas to life.
+    </p>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-icon"><i data-lucide="code-2"></i></div>
+        <div class="skill-card-title">Languages</div>
+        <div class="skill-card-desc">Core programming languages for building robust systems.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Rust</span>
+          <span class="skill-tag">Go</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon"><i data-lucide="box"></i></div>
+        <div class="skill-card-title">Frameworks</div>
+        <div class="skill-card-desc">Modern frameworks that accelerate development.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Vue</span>
+          <span class="skill-tag">Next.js</span>
+          <span class="skill-tag">FastAPI</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon"><i data-lucide="database"></i></div>
+        <div class="skill-card-title">Data &amp; Storage</div>
+        <div class="skill-card-desc">Databases and data management solutions.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">Redis</span>
+          <span class="skill-tag">MongoDB</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon"><i data-lucide="wrench"></i></div>
+        <div class="skill-card-title">DevOps &amp; Tools</div>
+        <div class="skill-card-desc">Infrastructure and productivity tooling.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">Nginx</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon"><i data-lucide="cloud"></i></div>
+        <div class="skill-card-title">Cloud</div>
+        <div class="skill-card-desc">Cloud platforms and serverless architecture.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">Vercel</span>
+          <span class="skill-tag">Cloudflare</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon"><i data-lucide="lightbulb"></i></div>
+        <div class="skill-card-title">Concepts</div>
+        <div class="skill-card-desc">Design patterns and architectural thinking.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">System Design</span>
+          <span class="skill-tag">API Design</span>
+          <span class="skill-tag">CI/CD</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ==========================================
+       Projects Section
+       ========================================== -->
+  <section id="projects" class="section">
+    <div class="section-label reveal">
+      <i data-lucide="rocket"></i>
+      <span>projects</span>
+    </div>
+    <h2 class="section-title reveal">
+      Featured <span class="gradient-text">work</span>
+    </h2>
+    <p class="section-subtitle reveal">
+      A selection of projects that represent my approach to building software.
+    </p>
+
+    <div class="projects-grid">
+      <div class="project-card" onclick="window.open('https://1step.dev','_blank')">
+        <div class="project-card-header">
+          <div class="project-card-icon"><i data-lucide="terminal"></i></div>
+          <span class="project-card-link"><i data-lucide="external-link"></i></span>
+        </div>
+        <div class="project-card-title">1step.dev</div>
+        <div class="project-card-desc">
+          This interactive terminal portfolio — a creative experiment in web-based
+          interfaces combining code, design, and playful interaction.
+        </div>
+        <div class="project-card-tech">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JavaScript</span>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="window.open('https://example.com/project-alpha','_blank')">
+        <div class="project-card-header">
+          <div class="project-card-icon"><i data-lucide="activity"></i></div>
+          <span class="project-card-link"><i data-lucide="external-link"></i></span>
+        </div>
+        <div class="project-card-title">Project Alpha</div>
+        <div class="project-card-desc">
+          A monitoring dashboard for real-time system metrics with
+          customizable widgets and alert configuration.
+        </div>
+        <div class="project-card-tech">
+          <span>React</span>
+          <span>TypeScript</span>
+          <span>WebSocket</span>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="window.open('https://example.com/beta-suite','_blank')">
+        <div class="project-card-header">
+          <div class="project-card-icon"><i data-lucide="cpu"></i></div>
+          <span class="project-card-link"><i data-lucide="external-link"></i></span>
+        </div>
+        <div class="project-card-title">Beta Suite</div>
+        <div class="project-card-desc">
+          An AI-powered content generation toolkit with multi-model
+          support, template engine, and collaborative editing.
+        </div>
+        <div class="project-card-tech">
+          <span>Python</span>
+          <span>FastAPI</span>
+          <span>Vue</span>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="window.open('https://github.com/jovix0101','_blank')">
+        <div class="project-card-header">
+          <div class="project-card-icon"><i data-lucide="git-branch"></i></div>
+          <span class="project-card-link"><i data-lucide="external-link"></i></span>
+        </div>
+        <div class="project-card-title">Open Source</div>
+        <div class="project-card-desc">
+          Contributions to various open-source projects. Believing in
+          building in public and sharing knowledge with the community.
+        </div>
+        <div class="project-card-tech">
+          <span>OSS</span>
+          <span>GitHub</span>
+          <span>Community</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ==========================================
+       Terminal Section (Embedded)
+       ========================================== -->
+  <section id="terminal-section" class="terminal-section section">
+    <div class="terminal-section-header">
+      <div class="section-label reveal">
+        <i data-lucide="terminal"></i>
+        <span>terminal</span>
+      </div>
+      <h2 class="section-title reveal">
+        The <span class="gradient-text">interactive terminal</span>
+      </h2>
+      <p class="section-subtitle reveal">
+        A fully functional web terminal. Type <code style="color:var(--accent-cyan);font-family:var(--font-mono);">help</code> to explore available commands.
+      </p>
+    </div>
+
+    <div id="terminal" class="terminal-window" style="display:none;">
+      <div id="terminal-header" class="terminal-header">
+        <div class="terminal-dots">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot yellow"></span>
+          <span class="terminal-dot green"></span>
+        </div>
+        <span class="title">jovix@1step.dev: ~ (web terminal)</span>
+        <div class="terminal-actions">
+          <button class="terminal-action-btn" onclick="location.reload()" title="Reload">
+            <i data-lucide="rotate-ccw"></i>
+          </button>
+        </div>
+      </div>
+      <div id="terminal-body" class="terminal-body"></div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ==========================================
+       Contact Section
+       ========================================== -->
+  <section id="contact" class="section">
+    <div class="section-label reveal">
+      <i data-lucide="mail"></i>
+      <span>contact</span>
+    </div>
+    <h2 class="section-title reveal">
+      Let's <span class="gradient-text">connect</span>
+    </h2>
+    <p class="section-subtitle reveal">
+      Open to collaboration, interesting projects, and good conversations.
+    </p>
+
+    <div class="contact-grid">
+      <div>
+        <p class="contact-info reveal-left">
+          Whether you have a project idea, want to contribute to open source,
+          or just want to say hello — I'd love to hear from you.
+        </p>
+
+        <div class="contact-links">
+          <a href="mailto:jovix0101@gmail.com" class="contact-link">
+            <i data-lucide="mail"></i>
+            <div>
+              <span class="contact-link-label">Email</span>
+              <span class="contact-link-value">jovix0101@gmail.com</span>
             </div>
-            <div id="terminal-body"></div>
-          </div>
-
-          <div id="power-button-area">
-            <button id="power-on-btn" aria-label="开机">
-              <svg id="power-button-light-strip-svg" viewBox="0 0 72 72">
-                <circle id="power-button-light-strip-circle" cx="36" cy="36" r="33.75" />
-              </svg>
-              <svg
-                id="power-button-icon-svg"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  d="M12.0001 2.00004C13.1009 2.00004 14.043 2.89938 14.1098 3.99396L14.1112 4.22738V10.7727C14.1112 11.8778 13.212 12.7727 12.107 12.7727C11.0018 12.7727 10.1068 11.8829 10.1025 10.7871L10.1024 10.7727V4.22738C10.1024 3.12231 10.9975 2.22738 12.1026 2.22738L12.0001 2.00004ZM12.0001 0.0000446963C6.47726 0.0000446963 2.00012 4.47718 2.00012 10C2.00012 15.5229 6.47726 20 12.0001 20C17.523 20 22.0001 15.5229 22.0001 10C22.0001 4.47718 17.523 0.0000446963 12.0001 0.0000446963ZM12.0001 18C7.58185 18 4.00012 14.4183 4.00012 10C4.00012 5.58176 7.58185 2.00004 12.0001 2.00004C16.4184 2.00004 20.0001 5.58176 20.0001 10C20.0001 14.4183 16.4184 18 12.0001 18Z"
-                />
-              </svg>
-            </button>
-            <div id="power-on-prompt">按住开机</div>
-          </div>
-        </section>
-      </section>
-
-      <section class="content-grid" aria-label="内容模块">
-        <section class="module about-module">
-          <p class="module-kicker">关于我</p>
-          <h2 class="module-title">用终端思维构建可靠的产品</h2>
-          <div class="about-layout">
-            <div class="about-copy">
-              <p>
-                我专注于交付清晰的界面与稳定的系统，重点在可维护的前端架构、务实的后端 API，以及可量化的产品结果。
-              </p>
-              <p>我偏好快速反馈：先快速原型验证，再逐步打磨到生产级质量。</p>
+          </a>
+          <a href="https://github.com/jovix0101" target="_blank" rel="noopener" class="contact-link">
+            <i data-lucide="github"></i>
+            <div>
+              <span class="contact-link-label">GitHub</span>
+              <span class="contact-link-value">github.com/jovix0101</span>
             </div>
-            <div class="about-metrics">
-              <div class="metric-card">
-                <span class="metric-value">20+</span>
-                <span class="metric-label">交付项目</span>
-              </div>
-              <div class="metric-card">
-                <span class="metric-value">6</span>
-                <span class="metric-label">Web 开发年限</span>
-              </div>
-              <div class="metric-card">
-                <span class="metric-value">99.9%</span>
-                <span class="metric-label">目标可用性</span>
-              </div>
+          </a>
+          <a href="https://1step.dev" target="_blank" rel="noopener" class="contact-link">
+            <i data-lucide="globe"></i>
+            <div>
+              <span class="contact-link-label">Website</span>
+              <span class="contact-link-value">1step.dev</span>
             </div>
-          </div>
-        </section>
+          </a>
+        </div>
+      </div>
 
-        <section class="module projects-module">
-          <div class="module-head">
-            <p class="module-kicker">精选项目</p>
-            <a href="https://1step.dev" target="_blank" class="module-link">查看全部文章与作品</a>
-          </div>
-          <div class="project-grid">
-            <article class="project-card">
-              <p class="project-name">终端作品集网站</p>
-              <p class="project-desc">交互式浏览器终端，用于展示个人信息、项目与社交链接。</p>
-              <p class="project-stack">HTML / CSS / Vanilla JS</p>
-            </article>
-            <article class="project-card">
-              <p class="project-name">实时运维仪表盘</p>
-              <p class="project-desc">面向分布式服务的监控面板，支持告警与趋势分析。</p>
-              <p class="project-stack">React / Node.js / PostgreSQL</p>
-            </article>
-            <article class="project-card">
-              <p class="project-name">内容自动化工具集</p>
-              <p class="project-desc">用于内容生产的自动化工具集，降低发布流程的人力成本。</p>
-              <p class="project-stack">Python / APIs / CI Pipelines</p>
-            </article>
-          </div>
-        </section>
+      <div class="cta-card reveal-right">
+        <h3 class="cta-card-title">Have an idea?</h3>
+        <p class="cta-card-desc">Let's build something remarkable together.</p>
+        <a href="mailto:jovix0101@gmail.com" class="btn btn-primary">
+          <i data-lucide="send"></i>
+          Get in Touch
+        </a>
+      </div>
+    </div>
+  </section>
 
-        <section class="module timeline-module">
-          <p class="module-kicker">时间线</p>
-          <h2 class="module-title">关键里程碑</h2>
-          <div class="timeline-list">
-            <div class="timeline-item">
-              <span class="timeline-year">2026</span>
-              <p>升级个人终端网站至 V2，并持续输出工程实践长文。</p>
-            </div>
-            <div class="timeline-item">
-              <span class="timeline-year">2025</span>
-              <p>主导多服务 Web 平台交付，重点优化性能与可观测性。</p>
-            </div>
-            <div class="timeline-item">
-              <span class="timeline-year">2024</span>
-              <p>构建可复用 UI 与 API 基础设施，缩短产品发布周期。</p>
-            </div>
-          </div>
-        </section>
+  <!-- ==========================================
+       Footer
+       ========================================== -->
+  <footer class="footer">
+    <span class="footer-text">
+      <i data-lucide="heart"></i>
+      Built by Jovix
+    </span>
+    <div class="footer-links">
+      <a href="https://github.com/jovix0101" target="_blank" rel="noopener" class="footer-link" title="GitHub">
+        <i data-lucide="github"></i>
+      </a>
+      <a href="https://1step.dev" target="_blank" rel="noopener" class="footer-link" title="Website">
+        <i data-lucide="globe"></i>
+      </a>
+      <a href="mailto:jovix0101@gmail.com" class="footer-link" title="Email">
+        <i data-lucide="mail"></i>
+      </a>
+    </div>
+  </footer>
 
-        <section class="module now-module">
-          <p class="module-kicker">近况</p>
-          <h2 class="module-title">当前关注方向</h2>
-          <ul class="now-list">
-            <li>打磨终端风格界面的开发体验与组件体系。</li>
-            <li>持续整理前端架构与工程交付实践文章。</li>
-            <li>欢迎产品化 AI 与开发者工具方向的合作。</li>
-          </ul>
-        </section>
+  <!-- Developer info (shown during boot) -->
+  <div id="developer-info" class="developer-info">
+    <i data-lucide="terminal"></i>
+    jovix@1step.dev
+  </div>
 
-        <section class="module contact-module">
-          <p class="module-kicker">联系我</p>
-          <h2 class="module-title">有项目想法？我们聊聊</h2>
-          <p class="contact-copy">如果你正在做产品，需要架构、实现或交付上的支持，欢迎联系我。</p>
-          <div class="contact-actions">
-            <a href="mailto:jovix0101@gmail.com" class="cta-primary">发邮件</a>
-            <a href="https://github.com/jovix0101" target="_blank" class="cta-secondary">GitHub</a>
-          </div>
-        </section>
-      </section>
-    </main>
+  <!-- ==========================================
+       Scripts
+       ========================================== -->
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
 
-    <footer id="developer-info">
-      由 Jovix 开发，Google Gemini 协助。 |
-      <a href="https://1step.dev" target="_blank" class="footer-link">我的博客</a>
-    </footer>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    });
+  </script>
 
-    <script type="module" src="main.js"></script>
-    <script defer src="https://analytics.1step.dev/tracker.min.js" data-website-id="1step.dev"></script>
-  </body>
+  <!-- Animation engine -->
+  <script src="awwwards.js"></script>
+
+  <!-- Terminal system -->
+  <script type="module" src="main.js"></script>
+</body>
 </html>

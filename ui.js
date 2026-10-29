@@ -1,84 +1,84 @@
 
 export const themes = {
-  dracula: {
-    '--background-color': '#282a36',
-    '--window-bg-color': '#1e1f29',
-    '--text-color': '#f8f8f2',
-    '--prompt-user-color': '#50fa7b',
-    '--prompt-path-color': '#bd93f9',
-    '--prompt-symbol-color': '#f8f8f2',
-    '--command-echo-color': '#f8f8f2',
-    '--output-color': '#f8f8f2',
+  void: {
+    '--background-color': '#0a0a0f',
+    '--window-bg-color': '#0a0a0f',
+    '--text-color': '#f0f0f5',
+    '--prompt-user-color': '#00f0ff',
+    '--prompt-path-color': '#8b5cf6',
+    '--prompt-symbol-color': '#f0f0f5',
+    '--command-echo-color': '#f0f0f5',
+    '--output-color': '#f0f0f5',
     '--error-color': '#ff5555',
-    '--link-color': '#8be9fd',
-    '--header-bg': '#1c1d26',
-    '--highlight-color': '#f1fa8c',
-    '--scrollbar-thumb-color': '#44475a',
-    '--scrollbar-track-color': '#282a36',
-    '--caret-color': '#f8f8f2',
-    '--font-size': '1em',
-    '--footer-text-color': '#7a7c8a',
-    '--power-prompt-text-color': '#bd93f9'
+    '--link-color': '#00f0ff',
+    '--header-bg': 'rgba(10, 10, 15, 0.6)',
+    '--highlight-color': '#fbbf24',
+    '--scrollbar-thumb-color': 'rgba(136, 136, 160, 0.3)',
+    '--scrollbar-track-color': 'transparent',
+    '--caret-color': '#00f0ff',
+    '--font-size': '0.875em',
+    '--footer-text-color': '#55556a',
+    '--power-prompt-text-color': '#8b5cf6'
   },
-  gruvbox: {
-    '--background-color': '#282828',
-    '--window-bg-color': '#1d2021',
-    '--text-color': '#ebdbb2',
-    '--prompt-user-color': '#b8bb26',
-    '--prompt-path-color': '#d3869b',
-    '--prompt-symbol-color': '#ebdbb2',
-    '--command-echo-color': '#ebdbb2',
-    '--output-color': '#ebdbb2',
-    '--error-color': '#fb4934',
-    '--link-color': '#83a598',
-    '--header-bg': '#32302f',
-    '--highlight-color': '#fabd2f',
-    '--scrollbar-thumb-color': '#504945',
-    '--scrollbar-track-color': '#282828',
-    '--caret-color': '#ebdbb2',
-    '--font-size': '1em',
-    '--footer-text-color': '#7c6f64',
-    '--power-prompt-text-color': '#d3869b'
+  amber: {
+    '--background-color': '#0f0a05',
+    '--window-bg-color': '#0f0a05',
+    '--text-color': '#f5efe0',
+    '--prompt-user-color': '#fbbf24',
+    '--prompt-path-color': '#f97316',
+    '--prompt-symbol-color': '#f5efe0',
+    '--command-echo-color': '#f5efe0',
+    '--output-color': '#f5efe0',
+    '--error-color': '#ef4444',
+    '--link-color': '#fbbf24',
+    '--header-bg': 'rgba(15, 10, 5, 0.6)',
+    '--highlight-color': '#f472b6',
+    '--scrollbar-thumb-color': 'rgba(251, 191, 36, 0.2)',
+    '--scrollbar-track-color': 'transparent',
+    '--caret-color': '#fbbf24',
+    '--font-size': '0.875em',
+    '--footer-text-color': '#8a7a5a',
+    '--power-prompt-text-color': '#f97316'
   },
-  matrix: {
-    '--background-color': '#000000',
-    '--window-bg-color': '#050505',
-    '--text-color': '#00ff00',
-    '--prompt-user-color': '#33ff33',
-    '--prompt-path-color': '#00cc00',
-    '--prompt-symbol-color': '#00ff00',
-    '--command-echo-color': '#33ff33',
-    '--output-color': '#00ff00',
-    '--error-color': '#cc0000',
-    '--link-color': '#00dddd',
-    '--header-bg': '#0a0a0a',
-    '--highlight-color': '#55ff55',
-    '--scrollbar-thumb-color': '#003300',
-    '--scrollbar-track-color': '#000000',
-    '--caret-color': '#00ff00',
-    '--font-size': '1.05em',
-    '--footer-text-color': '#005000',
-    '--power-prompt-text-color': '#00cc00'
+  ice: {
+    '--background-color': '#f0f4f8',
+    '--window-bg-color': '#f0f4f8',
+    '--text-color': '#1a202c',
+    '--prompt-user-color': '#0077b6',
+    '--prompt-path-color': '#6366f1',
+    '--prompt-symbol-color': '#1a202c',
+    '--command-echo-color': '#1a202c',
+    '--output-color': '#1a202c',
+    '--error-color': '#dc2626',
+    '--link-color': '#0077b6',
+    '--header-bg': 'rgba(240, 244, 248, 0.8)',
+    '--highlight-color': '#d97706',
+    '--scrollbar-thumb-color': 'rgba(26, 32, 44, 0.15)',
+    '--scrollbar-track-color': 'transparent',
+    '--caret-color': '#0077b6',
+    '--font-size': '0.875em',
+    '--footer-text-color': '#94a3b8',
+    '--power-prompt-text-color': '#6366f1'
   },
-  solarized: {
-    '--background-color': '#fdf6e3',
-    '--window-bg-color': '#fdf6e3',
-    '--text-color': '#657b83',
-    '--prompt-user-color': '#2aa198',
-    '--prompt-path-color': '#b58900',
-    '--prompt-symbol-color': '#657b83',
-    '--command-echo-color': '#586e75',
-    '--output-color': '#657b83',
-    '--error-color': '#dc322f',
-    '--link-color': '#268bd2',
-    '--header-bg': '#fdf6e3',
-    '--highlight-color': '#b58900',
-    '--scrollbar-thumb-color': '#93a1a1',
-    '--scrollbar-track-color': '#eee8d5',
-    '--caret-color': '#657b83',
-    '--font-size': '1em',
-    '--footer-text-color': '#93a1a1',
-    '--power-prompt-text-color': '#268bd2'
+  mono: {
+    '--background-color': '#0a0a0a',
+    '--window-bg-color': '#0a0a0a',
+    '--text-color': '#e0e0e0',
+    '--prompt-user-color': '#ffffff',
+    '--prompt-path-color': '#b0b0b0',
+    '--prompt-symbol-color': '#e0e0e0',
+    '--command-echo-color': '#e0e0e0',
+    '--output-color': '#e0e0e0',
+    '--error-color': '#ff4444',
+    '--link-color': '#ffffff',
+    '--header-bg': 'rgba(10, 10, 10, 0.6)',
+    '--highlight-color': '#ffffff',
+    '--scrollbar-thumb-color': 'rgba(224, 224, 224, 0.15)',
+    '--scrollbar-track-color': 'transparent',
+    '--caret-color': '#ffffff',
+    '--font-size': '0.875em',
+    '--footer-text-color': '#666666',
+    '--power-prompt-text-color': '#b0b0b0'
   }
 };
 
@@ -88,15 +88,12 @@ export function applyTheme(themeName) {
       for (const [variable, value] of Object.entries(theme)) {
         document.documentElement.style.setProperty(variable, value);
       }
-      if (theme['--background-color']) {
-        document.body.style.backgroundColor = theme['--background-color'];
-      }
       localStorage.setItem('terminalTheme', themeName);
-      return `主题已切换为 <span class="output-highlight">${themeName}</span>。`;
+      return `Theme switched to <span class="output-highlight">${themeName}</span>.`;
     }
-    return `未找到主题 '${themeName}'。可用主题：${Object.keys(themes)
+    return `Theme '${themeName}' not found. Available: ${Object.keys(themes)
       .map((t) => `<span class="output-highlight">${t}</span>`)
-      .join(', ')}。`;
+      .join(', ')}.`;
 }
 
 export function escapeHtml(unsafe) {
@@ -138,5 +135,7 @@ export function appendOutput(htmlContent, type = 'output') {
 
 export function scrollToBottom() {
     const terminalBody = document.getElementById('terminal-body');
-    terminalBody.scrollTop = terminalBody.scrollHeight;
+    if (terminalBody) {
+      terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
 }

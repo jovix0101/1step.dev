@@ -137,7 +137,7 @@ function resetCompletionSession() {
 
 function initializePageOnLoad() {
     const savedTheme = safeStorageGet('terminalTheme');
-    applyTheme(savedTheme && themes[savedTheme] ? savedTheme : 'dracula');
+    applyTheme(savedTheme && themes[savedTheme] ? savedTheme : 'void');
     hydrateSessionState();
 
     terminalElement.style.display = 'none';
@@ -146,7 +146,7 @@ function initializePageOnLoad() {
     powerButtonArea.style.display = 'flex';
     powerButtonArea.classList.add('visible');
     powerOnButton.classList.remove('interaction-held', 'threshold-met');
-    developerInfoFooter.style.opacity = '0.7';
+    if (developerInfoFooter) developerInfoFooter.style.opacity = '0.7';
 
     resetLightStrip();
 
@@ -305,7 +305,7 @@ function triggerFullPowerOn() {
       terminalElement.style.display = 'flex';
       terminalElement.classList.remove('shutting-down');
       terminalElement.classList.add('powering-on');
-      developerInfoFooter.style.opacity = '0.3';
+      if (developerInfoFooter) developerInfoFooter.style.opacity = '0.3';
 
       const handleTerminalAnimationEnd = () => {
         terminalElement.classList.remove('powering-on');
@@ -628,7 +628,7 @@ export function powerOff(isRebooting = false) {
     thresholdMetForPowerOn = false;
     powerOnButton.classList.remove('interaction-held', 'threshold-met');
 
-    developerInfoFooter.style.opacity = '0.7';
+    if (developerInfoFooter) developerInfoFooter.style.opacity = '0.7';
 
     if (commandInput) commandInput.disabled = true;
     appendOutput(`系统正在${isRebooting ? '重启' : '关机'}...`, 'output-highlight');
